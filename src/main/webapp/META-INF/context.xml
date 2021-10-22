@@ -6,13 +6,13 @@
     <!--////////FOR\\\\\\\-->
     <!--////MYSQLDriver\\\-->
     <Resource
-            name="jdbc/DataBaseTimeTracker"
+            name="jdbc/DataBaseHotel"
             auth="Container"
             type="javax.sql.DataSource"
             username="manager"
             password="sql123sql"
             driverClassName="com.mysql.cj.jdbc.Driver"
-            url="jdbc:mysql://localhost:3306/time_tracker_db?autoReconnect=true"
+            url="jdbc:mysql://localhost:3306/hotel_db?autoReconnect=true"
             validationQuery="select 1"
             defaultTransactionIsolation="READ_UNCOMMITTED"
             defaultAutoCommit="TRUE"

@@ -1,4 +1,4 @@
-package com.hotel.utils;
+package com.hotel.utils.enums;
 
 import java.util.Arrays;
 import java.util.List;

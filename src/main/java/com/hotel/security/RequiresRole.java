@@ -1,6 +1,6 @@
 package com.hotel.security;
 
-import com.hotel.utils.UserRolesEnum;
+import com.hotel.utils.enums.UserRolesEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

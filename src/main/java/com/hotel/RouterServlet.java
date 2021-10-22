@@ -1,7 +1,7 @@
 package com.hotel;
 
 import com.hotel.security.RequiresRole;
-import com.hotel.utils.UserRolesEnum;
+import com.hotel.utils.enums.UserRolesEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.hotel.security.commands.IndexCommand;
