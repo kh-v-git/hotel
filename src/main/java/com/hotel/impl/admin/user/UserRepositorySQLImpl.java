@@ -1,7 +1,7 @@
 package com.hotel.impl.admin.user;
 
 import com.hotel.utils.DataBaseManager;
-import com.hotel.utils.QueryRequestSQLGenerator;
+import com.hotel.utils.QueryGenerator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -39,8 +39,7 @@ public class UserRepositorySQLImpl implements UserRepository {
         try {
             con = DataBaseManager.getInstance().getConnection();
 
-            QueryRequestSQLGenerator generator = new QueryRequestSQLGenerator();
-            String queryPart = generator.makeQuery(searchText, searchParametersList);
+            String queryPart = QueryGenerator.makeQuery(searchText, searchParametersList);
             sqlInsertion = SELECT_ALL_FROM_USER + queryPart;
             //sqlInsertion = SELECT_ALL_FROM_USER;
             pstmt = con.prepareStatement(sqlInsertion);
@@ -158,7 +157,7 @@ public class UserRepositorySQLImpl implements UserRepository {
             con = DataBaseManager.getInstance().getConnection();
             con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
             sqlInsertion = String.format(UPDATE_USER_BY_ID, user.getEmail(), user.getPassword(), user.getFirstName(),
-                    user.getLastName(), user.getPhone(), user.getRole(), user.getStatus(), user.getAbout());
+                    user.getLastName(), user.getPhone(), user.getRole(), user.getStatus(), user.getAbout(), user.getUserID());
             pstmt = con.prepareStatement(sqlInsertion);
             pstmt.executeUpdate();
             con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);

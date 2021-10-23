@@ -29,6 +29,14 @@ CREATE TABLE room (
                       badSize ENUM('king', 'queen','twin', 'double', 'cot') NOT NULL DEFAULT 'cot'
 );
 
+CREATE TABLE room_image (
+    roomImageID INT AUTO_INCREMENT PRIMARY KEY ,
+    roomID INT,
+    caption VARCHAR(45) NOT NULL,
+    image LONGBLOB NOT NULL,
+    FOREIGN KEY (roomID) REFERENCES room(roomID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 CREATE TABLE user_request (
                               userRequestID INT AUTO_INCREMENT PRIMARY KEY ,
                               userID INT,

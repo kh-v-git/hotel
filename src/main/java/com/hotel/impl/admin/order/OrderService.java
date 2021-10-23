@@ -9,8 +9,8 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public List<Order> getOrderList(String searchText) {
-        return orderRepository.getOrderList(searchText);
+    public List<Order> getOrderList(String searchText, List<String> searchParametersList) {
+        return orderRepository.getOrderList(searchText, searchParametersList);
     }
 
     public boolean setOrder(Order order) {

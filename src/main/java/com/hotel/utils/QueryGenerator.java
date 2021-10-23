@@ -2,12 +2,12 @@ package com.hotel.utils;
 
 import java.util.List;
 
-public class QueryRequestSQLGenerator {
+public class QueryGenerator {
     private static final String LIKE = "LIKE";
     private static final String OR = "OR";
 
 
-    public String makeQuery(String sText, List<String> pList) {
+    public static String makeQuery(String sText, List<String> pList) {
         StringBuilder reString = new StringBuilder();
         boolean textIsEmpty = sText.isEmpty();
         boolean listIsEmpty = pList.isEmpty();
@@ -16,10 +16,10 @@ public class QueryRequestSQLGenerator {
             reString.append(" WHERE ");
             int i = 0;
             for (String searchParam : pList) {
-                reString.append(searchParam.toLowerCase()).append(" ").append(LIKE).append(" ").append("'").append(sText).append("' ");
+                reString.append("LOWER(").append(searchParam).append(")").append(" ").append(LIKE).append(" ").append("LOWER('%").append(sText).append("%')");
                 i++;
-                if (pList.size() > 2 || i < pList.size() - 1) {
-                    reString.append(OR).append(" ");
+                if (pList.size() > 1 && i < pList.size()) {
+                    reString.append(" ").append(OR).append(" ");
                 }
             }
         }
