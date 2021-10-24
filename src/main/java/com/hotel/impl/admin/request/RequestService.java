@@ -9,8 +9,8 @@ public class RequestService {
     public RequestService (RequestRepository requestRepository) {
         this.requestRepository = requestRepository;
     }
-    public List<Request> getRequestList(String searchText) {
-        return requestRepository.getRequestList(searchText);
+    public List<Request> getRequestList(String searchText, List<String> searchParametersList) {
+        return requestRepository.getRequestList(searchText, searchParametersList);
     }
 
     public boolean setRequest(Request request) {

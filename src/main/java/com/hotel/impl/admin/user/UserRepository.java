@@ -1,7 +1,5 @@
 package com.hotel.impl.admin.user;
 
-import com.hotel.impl.admin.room.Room;
-
 import java.util.List;
 import java.util.Optional;
 

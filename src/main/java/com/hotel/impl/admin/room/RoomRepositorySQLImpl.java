@@ -1,6 +1,7 @@
 package com.hotel.impl.admin.room;
 
 import com.hotel.utils.DataBaseManager;
+import com.hotel.utils.QueryGenerator;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,14 +29,15 @@ public class RoomRepositorySQLImpl implements RoomRepository {
     String sqlInsertion = null;
 
     @Override
-    public List<Room> getRoomList(String searchText) {
+    public List<Room> getRoomList(String searchText, List<String> searchParametersList) {
         con = null;
         pstmt = null;
         rs = null;
         List<Room> roomList = new ArrayList<>();
         try {
             con = DataBaseManager.getInstance().getConnection();
-            sqlInsertion = SELECT_ALL_FROM_ROOM;
+            String queryPart = QueryGenerator.makeQuery(searchText, searchParametersList);
+            sqlInsertion = SELECT_ALL_FROM_ROOM + queryPart;
             pstmt = con.prepareStatement(sqlInsertion);
             rs = pstmt.executeQuery();
             while (rs.next()) {

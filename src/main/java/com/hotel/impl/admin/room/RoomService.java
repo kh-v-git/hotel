@@ -5,23 +5,28 @@ import java.util.List;
 
 public class RoomService {
     private RoomRepository roomRepository;
-    public RoomService (RoomRepository roomRepository) {
+
+    public RoomService(RoomRepository roomRepository) {
         this.roomRepository = roomRepository;
     }
 
-    public List<Room> getRoomList (String searchText) {
-        return roomRepository.getRoomList(searchText);
+    public List<Room> getRoomList(String searchText, List<String> searchParametersList) {
+        return roomRepository.getRoomList(searchText, searchParametersList);
     }
-    public boolean setRoom (Room room) {
+
+    public boolean setRoom(Room room) {
         return roomRepository.setRoom(room);
     }
-    public boolean deleteRoom (int id) {
+
+    public boolean deleteRoom(int id) {
         return roomRepository.deleteRoom(id);
     }
-    public boolean updateRoom (Room room) {
+
+    public boolean updateRoom(Room room) {
         return roomRepository.updateRoom(room);
     }
-    public Room getRoom (int id) {
+
+    public Room getRoom(int id) {
         return roomRepository.getRoom(id);
     }
 }
