@@ -1,6 +1,7 @@
 package com.hotel.impl.admin.room;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RoomService {
@@ -12,6 +13,10 @@ public class RoomService {
 
     public List<Room> getRoomList(String searchText, List<String> searchParametersList) {
         return roomRepository.getRoomList(searchText, searchParametersList);
+    }
+    public List<Room> getRoomList() {
+        List<String> emptyList = new ArrayList<>();
+        return roomRepository.getRoomList("", emptyList);
     }
 
     public boolean setRoom(Room room) {

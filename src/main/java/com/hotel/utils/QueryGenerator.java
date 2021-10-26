@@ -2,11 +2,19 @@ package com.hotel.utils;
 
 import java.util.List;
 
+/**
+ * QueryGenerator makes part of SQL query from input search arg and list of
+ * column names
+ */
 public class QueryGenerator {
     private static final String LIKE = "LIKE";
     private static final String OR = "OR";
-
-
+    /**
+     *
+     * @param sText search text
+     * @param pList list of column name(s) for search
+     * @return part of query String
+     */
     public static String makeQuery(String sText, List<String> pList) {
         StringBuilder reString = new StringBuilder();
         boolean textIsEmpty = sText.isEmpty();

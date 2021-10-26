@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum RoomLevelEnum {
-    LUX, GOLD, STANDARD;
+    LUX,
+    GOLD,
+    STANDARD;
 
     public static List<String> getRoomLevelList() {
         return Arrays.stream(RoomLevelEnum.values())

@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum RoomBadSizeEnum {
-    KING, QUEEN, TWIN, DOUBLE, COT;
+    KING,
+    QUEEN,
+    TWIN,
+    DOUBLE,
+    COT;
 
     public static List<String> getRoomBadSizeList() {
         return Arrays.stream(RoomBadSizeEnum.values())

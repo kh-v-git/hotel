@@ -1,34 +1,45 @@
 package com.hotel.utils;
 
-import org.apache.logging.log4j.Level;
+import com.hotel.exception.ReadPropertyException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-
+/**
+ * Read property keys from custom file
+ */
 public class ReadProperties {
     private static final Logger log = LogManager.getLogger(ReadProperties.class);
 
+
     private ReadProperties() {
     }
-    public static String readProps(String pathToProps, String propertyToRead) {
-        String propertyData;
-        try (InputStream inputStream = new FileInputStream(pathToProps)) {
+    /**
+     * Read props key
+     * @param propertyFile property file container
+     * @param propertyToRead property to read
+     * @return property
+     * @throws ReadPropertyException
+     */
+    public static String readProps(String propertyFile, String propertyToRead) throws ReadPropertyException {
+        try (InputStream inputStream = Thread.currentThread()
+                .getContextClassLoader()
+                .getResourceAsStream(propertyFile)) {
+            if (inputStream == null) {
+                throw new ReadPropertyException("File no found " + propertyFile);
+            }
             Properties prop = new Properties();
             prop.load(inputStream);
-            propertyData = prop.getProperty(propertyToRead);
-        } catch (FileNotFoundException e) {
-            log.log(Level.ERROR, String.format("Fail to find %s file", pathToProps), e);
-            propertyData = null;
+            String property =  prop.getProperty(propertyToRead);
+            if (property == null) {
+                throw new ReadPropertyException("Property no found " + propertyToRead);
+            }
+            return property;
         } catch (IOException e) {
-            log.log(Level.ERROR, String.format("Fail to read %s property", propertyToRead), e);
-            propertyData = null;
+            throw new ReadPropertyException("Property no found " + propertyToRead, e);
         }
-        return propertyData;
     }
 }

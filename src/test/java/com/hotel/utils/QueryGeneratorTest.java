@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueryGeneratorTest {
-    String searchText;
     List<String> paramList;
-    String resultQuery;
-    String expectedQuery;
+    String searchText;
+
 
     @Before
     public void init() {
@@ -24,11 +23,11 @@ public class QueryGeneratorTest {
         //
         // Given
         //
-        expectedQuery = "";
+        String expectedQuery = "";
         //
         // When
         //
-        resultQuery = QueryGenerator.makeQuery(searchText, paramList);
+        String resultQuery = QueryGenerator.makeQuery(searchText, paramList);
         //
         // Then
         //
@@ -41,13 +40,13 @@ public class QueryGeneratorTest {
         //
         // Given
         //
-        expectedQuery = " WHERE LOWER(email) LIKE LOWER('%root%')";
+        String expectedQuery = " WHERE LOWER(email) LIKE LOWER('%root%')";
         searchText = "root".toLowerCase();
         paramList.add("email");
         //
         // When
         //
-        resultQuery = QueryGenerator.makeQuery(searchText, paramList);
+        String resultQuery = QueryGenerator.makeQuery(searchText, paramList);
         //
         // Then
         //
