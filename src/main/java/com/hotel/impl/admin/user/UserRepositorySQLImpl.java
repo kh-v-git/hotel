@@ -19,10 +19,10 @@ public class UserRepositorySQLImpl implements UserRepository {
 
     private static final String SELECT_ALL_FROM_USER = "SELECT * FROM user";
     private static final String INSERT_NEW_USER = "INSERT INTO user VALUES (DEFAULT, ?, ?, ?, ?, ?, ?,?,?)";
-    private static final String GET_USER_BY_ID = "SELECT * FROM user WHERE userID='%d'";
-    private static final String DELETE_USER_BY_ID = "DELETE FROM user WHERE userID='%d'";
-    private static final String UPDATE_USER_BY_ID = "UPDATE user SET email='%s', password='%s', firstName='%s', lastName='%s', phone='%s', role='%s', status='%s', about='%s' WHERE userID='%d'";
-    public static final String FIND_ALL_FROM_USER_EMAIL = "SELECT * FROM user WHERE userEmail='%s'";
+    private static final String GET_USER_BY_ID = "SELECT * FROM user WHERE user_id='%d'";
+    private static final String DELETE_USER_BY_ID = "DELETE FROM user WHERE user_id='%d'";
+    private static final String UPDATE_USER_BY_ID = "UPDATE user SET email='%s', password='%s', first_name='%s', last_name='%s', phone='%s', role='%s', status='%s', about='%s' WHERE user_id='%d'";
+    public static final String FIND_ALL_FROM_USER_EMAIL = "SELECT * FROM user WHERE email='%s'";
 
     private Connection con;
     private PreparedStatement pstmt;
@@ -46,10 +46,10 @@ public class UserRepositorySQLImpl implements UserRepository {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 user = new User();
-                user.setUserID(rs.getInt("userID"));
+                user.setUserID(rs.getInt("user_id"));
                 user.setPassword(rs.getString("password"));
-                user.setFirstName(rs.getString("firstName"));
-                user.setLastName(rs.getString("lastName"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
                 user.setPhone(rs.getString("phone"));
                 user.setRole(rs.getString("role"));
                 user.setStatus(rs.getString("status"));
@@ -109,10 +109,10 @@ public class UserRepositorySQLImpl implements UserRepository {
             pstmt = con.prepareStatement(sqlInsertion);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                user.setUserID(rs.getInt("userID"));
+                user.setUserID(rs.getInt("user_id"));
                 user.setPassword(rs.getString("password"));
-                user.setFirstName(rs.getString("firstName"));
-                user.setLastName(rs.getString("lastName"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
                 user.setPhone(rs.getString("phone"));
                 user.setRole(rs.getString("role"));
                 user.setStatus(rs.getString("status"));
@@ -185,10 +185,10 @@ public class UserRepositorySQLImpl implements UserRepository {
             pstmt = con.prepareStatement(sqlInsertion);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                user.setUserID(rs.getInt("userID"));
+                user.setUserID(rs.getInt("user_id"));
                 user.setPassword(rs.getString("password"));
-                user.setFirstName(rs.getString("firstName"));
-                user.setLastName(rs.getString("lastName"));
+                user.setFirstName(rs.getString("first_name"));
+                user.setLastName(rs.getString("last_name"));
                 user.setPhone(rs.getString("phone"));
                 user.setRole(rs.getString("role"));
                 user.setStatus(rs.getString("status"));

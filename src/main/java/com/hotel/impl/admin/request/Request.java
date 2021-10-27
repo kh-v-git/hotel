@@ -7,8 +7,7 @@ public class Request {
     private int userRequestID;
     private int userID;
     private String status;
-    private String badSize;
-    private String level;
+    private String bedSize;
     private int adultCapacity;
     private int childCapacity;
     private LocalDateTime arrivalDay;
@@ -38,20 +37,12 @@ public class Request {
         this.status = status;
     }
 
-    public String getBadSize() {
-        return badSize;
+    public String getBedSize() {
+        return bedSize;
     }
 
-    public void setBadSize(String badSize) {
-        this.badSize = badSize;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
+    public void setBedSize(String bedSize) {
+        this.bedSize = bedSize;
     }
 
     public int getAdultCapacity() {
@@ -91,20 +82,19 @@ public class Request {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
-        return getUserRequestID() == request.getUserRequestID() && getUserID() == request.getUserID() && getAdultCapacity() == request.getAdultCapacity() && getChildCapacity() == request.getChildCapacity() && getStatus().equals(request.getStatus()) && getBadSize().equals(request.getBadSize()) && getLevel().equals(request.getLevel()) && getArrivalDay().equals(request.getArrivalDay()) && getDepartureDay().equals(request.getDepartureDay());
+        return getUserRequestID() == request.getUserRequestID() && getUserID() == request.getUserID() && getAdultCapacity() == request.getAdultCapacity() && getChildCapacity() == request.getChildCapacity() && getStatus().equals(request.getStatus()) && getBedSize().equals(request.getBedSize()) && getArrivalDay().equals(request.getArrivalDay()) && getDepartureDay().equals(request.getDepartureDay());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserRequestID(), getUserID(), getStatus(), getBadSize(), getLevel(), getAdultCapacity(), getChildCapacity(), getArrivalDay(), getDepartureDay());
+        return Objects.hash(getUserRequestID(), getUserID(), getStatus(), getBedSize(), getAdultCapacity(), getChildCapacity(), getArrivalDay(), getDepartureDay());
     }
 
     @Override
     public String toString() {
         return "Request{" +
                 "status='" + status + '\'' +
-                ", badSize='" + badSize + '\'' +
-                ", level='" + level + '\'' +
+                ", bedSize='" + bedSize + '\'' +
                 ", adultCapacity=" + adultCapacity +
                 ", childCapacity=" + childCapacity +
                 ", arrivalDay=" + arrivalDay +

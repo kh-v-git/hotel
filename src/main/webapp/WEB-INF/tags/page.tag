@@ -7,6 +7,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<fmt:setLocale value="${sessionScope.session_locale}"/>
+
+<fmt:setBundle basename="locale_info" var="locale"/>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -98,13 +102,26 @@
 </header>
 
 <c:if test="${!skipHeader}">
-    <c:if test="${not empty error}">
+    <c:if test="${not empty errorPage}">
         <div class="genric-btn danger radius">
                 ${errorPage}
+        </div>
+    </c:if>
+    <c:if test="${not empty errorCommand}">
+        <div class="genric-btn danger radius">
                 ${errorCommand}
         </div>
     </c:if>
-    <span class="">${actionStatus}</span>
+    <c:if test="${not empty statusCommand}">
+        <div class="genric-btn danger radius">
+                ${statusCommand}
+        </div>
+    </c:if>
+    <c:if test="${not empty statusPage}">
+        <div class="genric-btn danger radius">
+                ${statusPage}
+        </div>
+    </c:if>
     <jsp:invoke fragment="header"/>
 </c:if>
 <jsp:doBody/>

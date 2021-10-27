@@ -15,10 +15,10 @@ public class OrderRepositorySQLImpl implements OrderRepository {
 
     private static final String SELECT_ALL_FROM_ORDER = "SELECT * FROM room_order";
     private static final String INSERT_NEW_ORDER = "INSERT INTO room_order VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String GET_ORDER_BY_ID = "SELECT * FROM room_order WHERE orderOrderID='%d'";
-    private static final String DELETE_ORDER_BY_ID = "DELETE FROM room_order WHERE orderOrderID='%d'";
-    private static final String UPDATE_ORDER_BY_ID = "UPDATE room_order SET userID='%d', roomID='%d', " +
-            "userRequestID='%d', orderStatus='%s', orderDate='%s', arrivalDate='%s', departureDate='%s' WHERE roomOrderID='%d'";
+    private static final String GET_ORDER_BY_ID = "SELECT * FROM room_order WHERE order_order_id='%d'";
+    private static final String DELETE_ORDER_BY_ID = "DELETE FROM room_order WHERE order_order_id='%d'";
+    private static final String UPDATE_ORDER_BY_ID = "UPDATE room_order SET user_id='%d', room_id='%d', " +
+            "user_request_id='%d', order_status='%s', order_date='%s', arrival_date='%s', departure_date='%s' WHERE room_order_id='%d'";
 
     private Connection con;
     private PreparedStatement pstmt;
@@ -41,14 +41,14 @@ public class OrderRepositorySQLImpl implements OrderRepository {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 order = new Order();
-                order.setRoomOrderID(rs.getInt("roomOrderID"));
-                order.setUserID(rs.getInt("userID"));
-                order.setRoomID(rs.getInt("roomID"));
-                order.setUserRequestID(rs.getInt("userRequestID"));
-                order.setOrderStatus(rs.getString("orderStatus"));
-                order.setOrderDate(rs.getTimestamp("orderDate").toLocalDateTime());
-                order.setArrivalDate(rs.getTimestamp("arrivalDay").toLocalDateTime());
-                order.setDepartureDate(rs.getTimestamp("departureDay").toLocalDateTime());
+                order.setRoomOrderID(rs.getInt("room_order_id"));
+                order.setUserID(rs.getInt("user_id"));
+                order.setRoomID(rs.getInt("room_id"));
+                order.setUserRequestID(rs.getInt("user_request_id"));
+                order.setOrderStatus(rs.getString("order_status"));
+                order.setOrderDate(rs.getTimestamp("order_date").toLocalDateTime());
+                order.setArrivalDate(rs.getTimestamp("arrival_day").toLocalDateTime());
+                order.setDepartureDate(rs.getTimestamp("departure_day").toLocalDateTime());
                 orderList.add(order);
             }
         } catch (
@@ -103,14 +103,14 @@ public class OrderRepositorySQLImpl implements OrderRepository {
             pstmt = con.prepareStatement(sqlInsertion);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                order.setRoomOrderID(rs.getInt("roomOrderID"));
-                order.setUserID(rs.getInt("userID"));
-                order.setRoomID(rs.getInt("roomID"));
-                order.setUserRequestID(rs.getInt("userRequestID"));
-                order.setOrderStatus(rs.getString("orderStatus"));
-                order.setOrderDate(rs.getTimestamp("orderDate").toLocalDateTime());
-                order.setArrivalDate(rs.getTimestamp("arrivalDay").toLocalDateTime());
-                order.setDepartureDate(rs.getTimestamp("departureDay").toLocalDateTime());
+                order.setRoomOrderID(rs.getInt("room_order_id"));
+                order.setUserID(rs.getInt("user_id"));
+                order.setRoomID(rs.getInt("room_id"));
+                order.setUserRequestID(rs.getInt("user_request_id"));
+                order.setOrderStatus(rs.getString("order_status"));
+                order.setOrderDate(rs.getTimestamp("order_date").toLocalDateTime());
+                order.setArrivalDate(rs.getTimestamp("arrival_day").toLocalDateTime());
+                order.setDepartureDate(rs.getTimestamp("departure_day").toLocalDateTime());
             }
         } catch (SQLException ex) {
             log.log(Level.ERROR, "Failed get Order by ID from DB", ex);

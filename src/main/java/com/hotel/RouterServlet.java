@@ -4,8 +4,8 @@ import com.hotel.security.RequiresRole;
 import com.hotel.utils.enums.UserRolesEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.hotel.security.commands.IndexCommand;
-import com.hotel.security.commands.LoginCommand;
+import com.hotel.security.commands.IndexPageCommand;
+import com.hotel.security.commands.LoginPageCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,13 +23,13 @@ public class RouterServlet extends HttpServlet {
     static Map<String, Command> commands = new HashMap<>();
 
     static {
-        commands.put("/login.command", new LoginCommand());
+        commands.put("/login.command", new LoginPageCommand());
         //commands.put("/register.command", new RegisterCommand());
        // commands.put("/register-user-page.command", new RegisterUserPageCommand());
        //commands.put("/authenticate.command", new AuthenticateCommand());
         //commands.put("/secured.command", new SecuredUserPageCommand());
        // commands.put("/logout.command", new LogoutCommand());
-        commands.put("/index.command", new IndexCommand());
+        commands.put("/index.command", new IndexPageCommand());
     }
 
     @Override

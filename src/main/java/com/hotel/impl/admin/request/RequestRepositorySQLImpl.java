@@ -14,11 +14,11 @@ public class RequestRepositorySQLImpl implements RequestRepository {
     private static final Logger log = LogManager.getLogger(RequestRepositorySQLImpl.class);
 
     private static final String SELECT_ALL_FROM_REQUEST = "SELECT * FROM user_request";
-    private static final String INSERT_NEW_REQUEST = "INSERT INTO user_request VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String GET_REQUEST_BY_ID = "SELECT * FROM user_request WHERE orderRequestID='%d'";
-    private static final String DELETE_REQUEST_BY_ID = "DELETE FROM user_request WHERE orderRequestID='%d'";
-    private static final String UPDATE_REQUEST_BY_ID = "UPDATE user_request SET userID='%d', " +
-            "status='%s', badSize='%s', level='%s', adultCapacity='%d', childCapacity='%d', arrivalDate='%s', departureDate='%s' WHERE userRequestID='%d'";
+    private static final String INSERT_NEW_REQUEST = "INSERT INTO user_request VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String GET_REQUEST_BY_ID = "SELECT * FROM user_request WHERE orderRequest_id='%d'";
+    private static final String DELETE_REQUEST_BY_ID = "DELETE FROM user_request WHERE orderRequest_id='%d'";
+    private static final String UPDATE_REQUEST_BY_ID = "UPDATE user_request SET user_id='%d', " +
+            "status='%s', bed_size='%s', adult_capacity='%d', child_capacity='%d', arrival_date='%s', departure_date='%s' WHERE user_request_id='%d'";
 
     private Connection con;
     private PreparedStatement pstmt;
@@ -42,15 +42,14 @@ public class RequestRepositorySQLImpl implements RequestRepository {
 
             while (rs.next()) {
                 request = new Request();
-                request.setUserRequestID(rs.getInt("userRequestID"));
-                request.setUserID(rs.getInt("userID"));
+                request.setUserRequestID(rs.getInt("user_request_id"));
+                request.setUserID(rs.getInt("user_id"));
                 request.setStatus(rs.getString("status"));
-                request.setBadSize(rs.getString("badSize"));
-                request.setLevel(rs.getString("level"));
-                request.setAdultCapacity(rs.getInt("adultCapacity"));
-                request.setChildCapacity(rs.getInt("childCapacity"));
-                request.setArrivalDay(rs.getTimestamp("arrivalDay").toLocalDateTime());
-                request.setDepartureDay(rs.getTimestamp("departureDay").toLocalDateTime());
+                request.setBedSize(rs.getString("bed_size"));
+                request.setAdultCapacity(rs.getInt("adult_capacity"));
+                request.setChildCapacity(rs.getInt("child_capacity"));
+                request.setArrivalDay(rs.getTimestamp("arrival_day").toLocalDateTime());
+                request.setDepartureDay(rs.getTimestamp("departure_day").toLocalDateTime());
                 requestList.add(request);
             }
         } catch (
@@ -74,11 +73,10 @@ public class RequestRepositorySQLImpl implements RequestRepository {
             pstmt = con.prepareStatement(INSERT_NEW_REQUEST);
             pstmt.setInt(1, request.getUserID());
             pstmt.setString(2, request.getStatus());
-            pstmt.setString(3, request.getBadSize());
-            pstmt.setString(4, request.getLevel());
-            pstmt.setInt(5, request.getAdultCapacity());
-            pstmt.setInt(6, request.getChildCapacity());
-            pstmt.setTimestamp(8, Timestamp.valueOf(request.getArrivalDay()));
+            pstmt.setString(3, request.getBedSize());
+            pstmt.setInt(4, request.getAdultCapacity());
+            pstmt.setInt(5, request.getChildCapacity());
+            pstmt.setTimestamp(6, Timestamp.valueOf(request.getArrivalDay()));
             pstmt.setTimestamp(7, Timestamp.valueOf(request.getDepartureDay()));
             pstmt.executeUpdate();
             con.commit();
@@ -106,15 +104,14 @@ public class RequestRepositorySQLImpl implements RequestRepository {
             pstmt = con.prepareStatement(sqlInsertion);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                request.setUserRequestID(rs.getInt("userRequestID"));
-                request.setUserID(rs.getInt("userID"));
+                request.setUserRequestID(rs.getInt("user_request_id"));
+                request.setUserID(rs.getInt("user_id"));
                 request.setStatus(rs.getString("status"));
-                request.setBadSize(rs.getString("badSize"));
-                request.setLevel(rs.getString("level"));
-                request.setAdultCapacity(rs.getInt("adultCapacity"));
-                request.setChildCapacity(rs.getInt("childCapacity"));
-                request.setArrivalDay(rs.getTimestamp("arrivalDay").toLocalDateTime());
-                request.setDepartureDay(rs.getTimestamp("departureDay").toLocalDateTime());
+                request.setBedSize(rs.getString("bed_size"));
+                request.setAdultCapacity(rs.getInt("adult_capacity"));
+                request.setChildCapacity(rs.getInt("child_capacity"));
+                request.setArrivalDay(rs.getTimestamp("arrival_day").toLocalDateTime());
+                request.setDepartureDay(rs.getTimestamp("departure_day").toLocalDateTime());
             }
         } catch (SQLException ex) {
             log.log(Level.ERROR, "Failed get Request by ID from DB", ex);
@@ -154,8 +151,8 @@ public class RequestRepositorySQLImpl implements RequestRepository {
         try {
             con = DataBaseManager.getInstance().getConnection();
             con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-            sqlInsertion = String.format(UPDATE_REQUEST_BY_ID, request.getUserID(), request.getStatus(), request.getBadSize(),
-                    request.getLevel(), request.getAdultCapacity(), request.getChildCapacity(), request.getArrivalDay(),
+            sqlInsertion = String.format(UPDATE_REQUEST_BY_ID, request.getUserID(), request.getStatus(), request.getBedSize(),
+                    request.getAdultCapacity(), request.getChildCapacity(), request.getArrivalDay(),
                     request.getDepartureDay(), request.getUserRequestID());
             pstmt = con.prepareStatement(sqlInsertion);
             pstmt.executeUpdate();

@@ -18,9 +18,9 @@ public class RoomRepositorySQLImpl implements RoomRepository {
 
     private static final String SELECT_ALL_FROM_ROOM = "SELECT * FROM room";
     private static final String INSERT_NEW_ROOM = "INSERT INTO room VALUES (DEFAULT, ?, ?, ?, ?, ?, ?)";
-    private static final String GET_ROOM_BY_ID = "SELECT * FROM room WHERE roomID='%d'";
-    private static final String DELETE_ROOM_BY_ID = "DELETE FROM room WHERE roomID='%d'";
-    private static final String UPDATE_ROOM_BY_ID = "UPDATE room SET number='%d', adultCapacity='%d', childCapacity='%d', price='%.2f', level='%s', badSize='%s' WHERE roomID='%d'";
+    private static final String GET_ROOM_BY_ID = "SELECT * FROM room WHERE room_id='%d'";
+    private static final String DELETE_ROOM_BY_ID = "DELETE FROM room WHERE room_id='%d'";
+    private static final String UPDATE_ROOM_BY_ID = "UPDATE room SET number='%d', adult_capacity='%d', child_capacity='%d', price='%.2f', bed_size='%s', about='%s' WHERE room_id='%d'";
 
     private Connection con;
     private PreparedStatement pstmt;
@@ -42,12 +42,13 @@ public class RoomRepositorySQLImpl implements RoomRepository {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 room = new Room();
-                room.setRoomID(rs.getInt("roomID"));
+                room.setRoomID(rs.getInt("room_id"));
                 room.setNumber(rs.getInt("number"));
-                room.setAdultCapacity(rs.getInt("adultCapacity"));
-                room.setChildCapacity(rs.getInt("childCapacity"));
+                room.setAdultCapacity(rs.getInt("adult_capacity"));
+                room.setChildCapacity(rs.getInt("child_capacity"));
                 room.setPrice(rs.getBigDecimal("price").doubleValue());
-                room.setLevel(rs.getString("badSize"));
+                room.setBedSize(rs.getString("bed_size"));
+                room.setAbout(rs.getString("about"));
                 roomList.add(room);
             }
         } catch (
@@ -73,8 +74,8 @@ public class RoomRepositorySQLImpl implements RoomRepository {
             pstmt.setInt(2, room.getAdultCapacity());
             pstmt.setInt(3, room.getChildCapacity());
             pstmt.setDouble(4, room.getPrice());
-            pstmt.setString(5, room.getLevel());
-            pstmt.setString(6, room.getBadSize());
+            pstmt.setString(5, room.getBedSize());
+            pstmt.setString(6, room.getAbout());
             pstmt.executeUpdate();
             con.commit();
             return true;
@@ -101,12 +102,13 @@ public class RoomRepositorySQLImpl implements RoomRepository {
             pstmt = con.prepareStatement(sqlInsertion);
             rs = pstmt.executeQuery();
             if (rs.next()) {
-                room.setRoomID(rs.getInt("roomID"));
+                room.setRoomID(rs.getInt("room_id"));
                 room.setNumber(rs.getInt("number"));
-                room.setAdultCapacity(rs.getInt("adultCapacity"));
-                room.setChildCapacity(rs.getInt("childCapacity"));
+                room.setAdultCapacity(rs.getInt("adult_capacity"));
+                room.setChildCapacity(rs.getInt("child_capacity"));
                 room.setPrice(rs.getBigDecimal("price").doubleValue());
-                room.setLevel(rs.getString("badSize"));
+                room.setBedSize(rs.getString("bed_size"));
+                room.setAbout(rs.getString("about"));
             }
         } catch (SQLException ex) {
             log.log(Level.ERROR, "Failed get Room by ID from DB", ex);
@@ -146,7 +148,7 @@ public class RoomRepositorySQLImpl implements RoomRepository {
         try {
             con = DataBaseManager.getInstance().getConnection();
             con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-            sqlInsertion = String.format(UPDATE_ROOM_BY_ID, room.getNumber(), room.getAdultCapacity(), room.getChildCapacity(), room.getPrice(), room.getLevel(), room.getBadSize(), room.getRoomID());
+            sqlInsertion = String.format(UPDATE_ROOM_BY_ID, room.getNumber(), room.getAdultCapacity(), room.getChildCapacity(), room.getPrice(), room.getBedSize(),  room.getAbout(), room.getRoomID());
             pstmt = con.prepareStatement(sqlInsertion);
             pstmt.executeUpdate();
             con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);

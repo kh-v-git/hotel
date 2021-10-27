@@ -8,8 +8,16 @@ public class Room {
     private int adultCapacity;
     private int childCapacity;
     private double price;
-    private String level;
-    private String badSize;
+    private String bedSize;
+    private String about;
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
 
     public int getRoomID() {
         return roomID;
@@ -51,20 +59,12 @@ public class Room {
         this.price = price;
     }
 
-    public String getLevel() {
-        return level;
+    public String getBedSize() {
+        return bedSize;
     }
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getBadSize() {
-        return badSize;
-    }
-
-    public void setBadSize(String badSize) {
-        this.badSize = badSize;
+    public void setBedSize(String bedSize) {
+        this.bedSize = bedSize;
     }
 
     @Override
@@ -72,12 +72,12 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return getNumber() == room.getNumber() && getAdultCapacity() == room.getAdultCapacity() && getChildCapacity() == room.getChildCapacity() && Double.compare(room.getPrice(), getPrice()) == 0 && getLevel().equals(room.getLevel()) && getBadSize().equals(room.getBadSize());
+        return getRoomID() == room.getRoomID() && getNumber() == room.getNumber() && getAdultCapacity() == room.getAdultCapacity() && getChildCapacity() == room.getChildCapacity() && Double.compare(room.getPrice(), getPrice()) == 0 && getBedSize().equals(room.getBedSize()) && getAbout().equals(room.getAbout());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNumber(), getAdultCapacity(), getChildCapacity(), getPrice(), getLevel(), getBadSize());
+        return Objects.hash(getNumber(), getAdultCapacity(), getChildCapacity(), getPrice(), getBedSize(), getAbout());
     }
 
     @Override
@@ -87,8 +87,8 @@ public class Room {
                 ", adultCapacity=" + adultCapacity +
                 ", childCapacity=" + childCapacity +
                 ", price=" + price +
-                ", level='" + level + '\'' +
-                ", badSize='" + badSize + '\'' +
+                ", bedSize='" + bedSize + '\'' +
+                ", about='" + about + '\'' +
                 '}';
     }
 }

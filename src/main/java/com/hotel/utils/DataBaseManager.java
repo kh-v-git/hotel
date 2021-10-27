@@ -21,7 +21,7 @@ public class DataBaseManager {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
-            dsPool = (DataSource) envContext.lookup("jdbc/DataBaseTimeTracker");
+            dsPool = (DataSource) envContext.lookup("jdbc/DataBaseHotel");
         } catch (NamingException ex) {
             log.log(Level.ERROR, "Cannot initialize DB connection", ex);
         }
