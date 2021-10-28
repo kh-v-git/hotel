@@ -6,6 +6,7 @@ import com.hotel.impl.admin.room.RoomRepository;
 import com.hotel.impl.admin.room.RoomRepositorySQLImpl;
 import com.hotel.impl.admin.room.RoomService;
 import com.hotel.model.RoomView;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,9 +18,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * command to view index page
+ */
 public class IndexPageCommand implements Command {
     private static final Logger log = LogManager.getLogger(IndexPageCommand.class);
 
+    /**
+     * Collect data for index.jsp
+     *
+     * @param request  http request
+     * @param response http response
+     * @throws Exception servlet exception
+     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<RoomView> roomViewList = mainActivityProcess();
@@ -28,6 +39,7 @@ public class IndexPageCommand implements Command {
             request.setAttribute("roomViewList", roomViewList);
         } else {
             request.setAttribute("errorPage", "Hotel has no rooms");
+            log.log(Level.ERROR, "No room found in hotel");
         }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.jsp");

@@ -1,5 +1,6 @@
 package com.hotel;
 
+import com.hotel.impl.common.LocaleCommand;
 import com.hotel.security.RequiresRole;
 import com.hotel.utils.enums.UserRolesEnum;
 import org.apache.logging.log4j.LogManager;
@@ -23,13 +24,14 @@ public class RouterServlet extends HttpServlet {
     static Map<String, Command> commands = new HashMap<>();
 
     static {
+        commands.put("/index.command", new IndexPageCommand());
+        commands.put("/locale.command", new LocaleCommand() );
         commands.put("/login.command", new LoginPageCommand());
         //commands.put("/register.command", new RegisterCommand());
        // commands.put("/register-user-page.command", new RegisterUserPageCommand());
        //commands.put("/authenticate.command", new AuthenticateCommand());
         //commands.put("/secured.command", new SecuredUserPageCommand());
        // commands.put("/logout.command", new LogoutCommand());
-        commands.put("/index.command", new IndexPageCommand());
     }
 
     @Override

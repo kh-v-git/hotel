@@ -3,8 +3,6 @@ package com.hotel.utils;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class UserDataValidationTest {
 
     @Test
@@ -17,7 +15,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -34,7 +32,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -51,7 +49,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -68,7 +66,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -85,7 +83,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -102,7 +100,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -119,7 +117,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -136,7 +134,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = UserDataValidation.checkInputData(phoneNumber, param);
+        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //

@@ -16,7 +16,9 @@ public class AuthenticationFilter implements Filter {
 
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 
-        if (path.startsWith("/login.command") || path.startsWith("/authenticate.command") || path.startsWith("/register-user-page.command") || path.startsWith("/assets") || path.startsWith("/index.command")) {
+        if (path.startsWith("/login.command") || path.startsWith("/authenticate.command")
+                || path.startsWith("/register-user-page.command") || path.startsWith("/assets")
+                || path.startsWith("/index.command") || path.startsWith("/locale.command")) {
             chain.doFilter(request, response);
             return;
         }

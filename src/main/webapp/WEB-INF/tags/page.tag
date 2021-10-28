@@ -4,18 +4,14 @@
 <%@attribute name="footer" fragment="true" %>
 <%@attribute name="title" required="true" type="java.lang.String" %>
 <%@attribute name="skipHeader" type="java.lang.Boolean" %>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<fmt:setLocale value="${sessionScope.session_locale}"/>
-
-<fmt:setBundle basename="locale_info" var="locale"/>
-
+<fmt:setLocale value="${sessionScope.locale}"/>
 <!doctype html>
-<html lang="en">
+<html lang="${sessionScope.locale}">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -59,23 +55,18 @@
                                     <li><a href="#">Home</a></li>
                                     <li><a href="#">About</a></li>
                                     <li><a href="#">Rooms</a></li>
+                                    <li><a href="login.command">Login</a></li>
                                 </ul>
                             </nav>
                         </div>
                     </div>
                     <div class="col-xl-2 col-lg-2">
-                        <!-- header-btn -->
-                        <div class="header-btn">
-                            <a href="#" class="btn btn1 d-none d-lg-block align-center ">Book Online</a>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-lg-2">
                         <div class="d-none d-lg-block">
                             <div class="nice-select">
-                                <span class="current">Eng</span>
+                                <span class="current">${"uk_UA" eq (sessionScope.locale) ? "Uk" : "En"}</span>
                                 <ul class="list">
-                                    <li data-value=" 1" class="option selected focus">Eng</li>
-                                    <li data-value="2" class="option">Ukr</li>
+                                    <li data-value="1" class="option selected focus"> <a href="locale.command?locale=en_US">En</a></li>
+                                    <li data-value="2" class="option"> <a href="locale.command?locale=uk_UA">Uk</a></li>
                                 </ul>
                             </div>
                         </div>

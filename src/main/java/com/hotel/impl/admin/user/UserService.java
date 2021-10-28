@@ -1,14 +1,12 @@
 package com.hotel.impl.admin.user;
 
-import com.hotel.impl.admin.room.Room;
-
 import java.util.List;
 import java.util.Optional;
 
 public class UserService {
     private UserRepository userRepository;
 
-    UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

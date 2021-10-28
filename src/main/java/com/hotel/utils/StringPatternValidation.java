@@ -4,14 +4,15 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Check data from user using patterns
  */
-public class UserDataValidation {
-    private static final Logger log = LogManager.getLogger(UserDataValidation.class);
+public class StringPatternValidation {
+    private static final Logger log = LogManager.getLogger(StringPatternValidation.class);
 
     private static final String PHONE_PATTERN = "^[0-9]{12}$";
     private static final String NAME_PATTERN = "^(?=.{1,50}$)\\p{L}+(?:[-'\\s]\\p{L}+)*$";
@@ -60,8 +61,12 @@ public class UserDataValidation {
         return checkStatus;
     }
     private static boolean patternCheck (String inpData, String pattern) {
+         String dataCheck = Optional.ofNullable(inpData)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
         Pattern pat = Pattern.compile(pattern);
-        Matcher mat = pat.matcher(inpData);
+        Matcher mat = pat.matcher(dataCheck);
         return mat.find();
     }
 }
