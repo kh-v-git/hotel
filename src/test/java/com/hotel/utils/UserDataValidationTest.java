@@ -15,7 +15,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -32,7 +32,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -49,7 +49,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -66,7 +66,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -83,7 +83,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -100,7 +100,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -117,7 +117,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //
@@ -134,7 +134,7 @@ public class UserDataValidationTest {
         //
         // When
         //
-        boolean result = StringPatternValidation.checkInputData(phoneNumber, param);
+        boolean result = DataPatternValidation.checkInputData(phoneNumber, param);
         //
         // Then
         //

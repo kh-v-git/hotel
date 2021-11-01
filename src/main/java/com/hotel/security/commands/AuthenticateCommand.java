@@ -6,7 +6,7 @@ import com.hotel.impl.admin.user.User;
 import com.hotel.impl.admin.user.UserRepository;
 import com.hotel.impl.admin.user.UserRepositorySQLImpl;
 import com.hotel.impl.admin.user.UserService;
-import com.hotel.utils.StringPatternValidation;
+import com.hotel.utils.DataPatternValidation;
 import com.hotel.utils.passwordhash.PasswordImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -25,7 +25,8 @@ public class AuthenticateCommand implements Command {
 
     /**
      * Redirect auth user to proper page
-     * @param request http request
+     *
+     * @param request  http request
      * @param response http response
      * @throws Exception method exception
      */
@@ -46,55 +47,47 @@ public class AuthenticateCommand implements Command {
                 return;
             }
         }
-        request.setAttribute("error", "Wrong username or password");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.jsp");
+        request.setAttribute("errorPage", "Wrong username or password");
+        request.getSession().setAttribute("pageCommand", "login.command");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("login.command");
         requestDispatcher.forward(request, response);
     }
 
     private boolean authorizationCheck(HttpServletRequest authRequest) {
+        String userEmail = authRequest.getParameter("user-email".trim());
+        String userPass = authRequest.getParameter("user-password".trim());
         UserRepository userRepository = new UserRepositorySQLImpl();
         UserService userService = new UserService(userRepository);
 
-        String email = dataCheck(authRequest, "userEmail");
-        String password = dataCheck(authRequest, "userPassword");
+        boolean emailCheck = DataPatternValidation.checkInputData(userEmail, "email");
+        boolean passwordCheck = DataPatternValidation.checkInputData(userPass, "password");
 
-        if (email.isEmpty() || password.isEmpty()) {
-            return false;
-        }
-        if (!StringPatternValidation.checkInputData(email, "email")) {
-            return false;
-        }
-
-        if (!StringPatternValidation.checkInputData(password, "password")) {
-            return false;
-        }
-
-        Optional<User> authUserOptional = userService.authUser(email);
-        if (!authUserOptional.isPresent()) {
-            return false;
-        }
-        String hashPassword;
-        try {
-            hashPassword = PasswordImpl.hashPassword(password);
-            User authUser = authUserOptional.get();
-            if (email.equals(authUser.getEmail()) && hashPassword.equals(authUser.getPassword())) {
-                authRequest.getSession().setAttribute("userRole", authUser.getRole());
-                authRequest.getSession().setAttribute("userStatus", authUser.getStatus());
-                authRequest.getSession().setAttribute("userEmail", authUser.getEmail());
-                authRequest.getSession().setAttribute("userId", authUser.getUserID());
-                return true;
+        if (emailCheck && passwordCheck) {
+            Optional<User> authUserOptional = userService.authUser(userEmail);
+            if (!authUserOptional.isPresent()) {
+                return false;
             }
-        } catch (HashPasswordException ex) {
-            log.log(Level.ERROR, "Auth user hashing password error", ex);
-            return false;
+            User authUser = authUserOptional.get();
+            if ("active".equals(authUser.getStatus())) {
+                String hashPassword;
+                try {
+                    hashPassword = PasswordImpl.hashPassword(userPass);
+                    String test = hashPassword;
+                    if (userEmail.equals(authUser.getEmail()) && hashPassword.equals(authUser.getPassword())) {
+                        authRequest.getSession().setAttribute("userRole", authUser.getRole());
+                        authRequest.getSession().setAttribute("userStatus", authUser.getStatus());
+                        authRequest.getSession().setAttribute("userEmail", authUser.getEmail());
+                        authRequest.getSession().setAttribute("userId", authUser.getUserID());
+                        return true;
+                    }
+                } catch (HashPasswordException ex) {
+                    log.log(Level.ERROR, "Auth user hashing password error", ex);
+                    authRequest.setAttribute("errorCommand", "System internal error");
+                }
+            } else {
+                authRequest.setAttribute("errorCommand", "User is banned");
+            }
         }
         return false;
-    }
-
-    private String dataCheck(HttpServletRequest request, String inputParam) {
-        return Optional.ofNullable(request.getParameter(inputParam))
-                .map(Object::toString)
-                .map(String::trim)
-                .orElse("");
     }
 }

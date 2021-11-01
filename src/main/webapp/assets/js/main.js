@@ -160,12 +160,16 @@
       });
     }
 
-
 /* 6. Nice Selectorp  */
   var nice_Select = $('select');
     if(nice_Select.length){
       nice_Select.niceSelect();
+    } else {
+      $('.nice-select').click(function() {
+        $(this).toggleClass("open");
+      });
     }
+
 
 /* 7.  Custom Sticky Menu  */
     $(window).on('scroll', function () {

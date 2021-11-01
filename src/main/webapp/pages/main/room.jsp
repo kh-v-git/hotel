@@ -6,44 +6,25 @@
 <fmt:setLocale value="${sessionScope.locale}"/>
 <fmt:setBundle basename="locale_data" var="localeBundle"/>
 
-<fmt:message key="main.page.title" bundle="${localeBundle}" var="pageRoomTitle" scope="page"/>
-<t:page title="${pageRoomTitle}">
+<fmt:message key="rooms.page.title" bundle="${localeBundle}" var="pageRoomsTitle"/>
+<t:page title="${pageRoomsTitle}">
     <jsp:body>
         <main>
+
             <!-- slider Area Start-->
             <div class="slider-area">
-                <!-- Mobile Menu -->
-                <div class="slider-active dot-style">
-                    <div class="single-slider  hero-overly slider-height d-flex align-items-center"
-                         data-background="assets/img/hero/h1_hero.jpg">
-                        <div class="container">
-                            <div class="row justify-content-center text-center">
-                                <div class="col-xl-9">
-                                    <div class="h1-slider-caption">
-                                        <h1 data-animation="fadeInUp" data-delay=".4s">
-                                            <fmt:message key="hotel.slider.one.index" bundle="${localeBundle}"/>
-                                        </h1>
-                                        <h3 data-animation="fadeInDown" data-delay=".4s">
-                                            <fmt:message key="hotel.description.index" bundle="${localeBundle}"/>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single-slider  hero-overly slider-height d-flex align-items-center"
-                         data-background="assets/img/hero/h1_hero.jpg">
-                        <div class="container">
-                            <div class="row justify-content-center text-center">
-                                <div class="col-xl-9">
-                                    <div class="h1-slider-caption">
-                                        <h1 data-animation="fadeInUp" data-delay=".4s">
-                                            <fmt:message key="hotel.slider.two.index" bundle="${localeBundle}"/>
-                                        </h1>
-                                        <h3 data-animation="fadeInDown" data-delay=".4s">
-                                            <fmt:message key="hotel.description.index" bundle="${localeBundle}"/>
-                                        </h3>
-                                    </div>
+                <div class="single-slider hero-overly slider-height2 d-flex align-items-center"
+                     data-background="assets/img/hero/aboutpage_hero.jpg">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
+                                <div class="hero-caption">
+                                    <span>
+                                        <fmt:message key="about.room" bundle="${localeBundle}"/>
+                                    </span>
+                                    <h2>
+                                        <fmt:message key="room" bundle="${localeBundle}"/> № ${pageRoom.number}
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -57,12 +38,12 @@
                 <div class="container">
                     <div class="row ">
                         <div class="col-12">
-                            <form action="#">
+                            <form action="#" method="post">
                                 <div class="booking-wrap d-flex justify-content-between align-items-center">
 
-                                    <!-- select in date -->
+                                    <!-- select arrival date -->
                                     <div class="single-select-box mb-30">
-                                        <!-- select out date -->
+                                        <!-- select arival date -->
                                         <div class="boking-tittle">
                                             <span>
                                                 <fmt:message key="check.in.date" bundle="${localeBundle}"/>:
@@ -72,7 +53,8 @@
                                             <input name="arrival-date" id="datepicker1" placeholder="10/12/2020"/>
                                         </div>
                                     </div>
-                                    <!-- Single Select Box -->
+
+                                    <!-- select departure date -->
                                     <div class="single-select-box mb-30">
                                         <!-- select out date -->
                                         <div class="boking-tittle">
@@ -84,7 +66,8 @@
                                             <input name="departure-date" id="datepicker2" placeholder="12/12/2020"/>
                                         </div>
                                     </div>
-                                    <!-- Single Select Box -->
+
+                                    <!-- select adults capacity-->
                                     <div class="single-select-box mb-30">
                                         <div class="boking-tittle">
                                             <span>
@@ -93,15 +76,13 @@
                                         </div>
                                         <div class="select-this">
                                             <div class="select-itms">
-                                                <select name="adults-capacity-request" id="select1">
-                                                    <c:forEach varStatus="loop" begin="1" end="${maxAdults}" step="1">
-                                                        <option value="${loop.count}">${loop.count}</option>
-                                                    </c:forEach>
+                                                <select name="adults-capacity-request" id="select1" >
+                                                        <option value="${pageRoom.adultCapacity}">${pageRoom.adultCapacity}</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Single Select Box -->
+                                    <!-- select children capacity-->
                                     <div class="single-select-box mb-30">
                                         <div class="boking-tittle">
                                             <span>
@@ -111,9 +92,7 @@
                                         <div class="select-this">
                                             <div class="select-itms">
                                                 <select name="children-capacity-request" id="select2">
-                                                    <c:forEach varStatus="loop" begin="1" end="${maxChildren}" step="1">
-                                                        <option value="${loop.count}">${loop.count}</option>
-                                                    </c:forEach>
+                                                    <option value="${pageRoom.childrenCapacity}">${pageRoom.childrenCapacity}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -129,9 +108,7 @@
                                             <form action="#">
                                                 <div class="select-itms">
                                                     <select name="bed-size-request" id="select3" required>
-                                                        <c:forEach items="${roomBedSizeList}" var="roomBedSize">
-                                                            <option value="bed-size-order">${roomBedSize}</option>
-                                                        </c:forEach>
+                                                        <option value="${pageRoom.bedSize}">${pageRoom.bedSize}</option>
                                                     </select>
                                                 </div>
                                             </form>
@@ -140,7 +117,7 @@
                                     <!-- Single Select Box -->
                                     <div class="single-select-box pt-45 mb-30">
                                         <a href="#" class="btn select-btn">
-                                            <fmt:message key="request.now" bundle="${localeBundle}"/>
+                                            <fmt:message key="book.now" bundle="${localeBundle}"/>
                                         </a>
                                     </div>
                                 </div>
@@ -151,65 +128,53 @@
             </div>
             <!-- Booking Room End-->
 
-            <!-- Room Start -->
-            <section class="room-area customar-padding fix">
-                <div class="container container-fluid p-0">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-8">
-                            <!--font-back-tittle  -->
-                            <div class="font-back-tittle mb-45">
-                                <div class="archivment-front">
+            <!-- One Room Description Start-->
+            <section class="make-customer-area customar-padding fix">
+                <div class="container-fluid p-0">
+                    <div class="row">
+                        <div class="col-xl-5 col-lg-6">
+                            <div class="customer-img mb-120">
+                                <img src="assets/img/customer/customar1.png" class="customar-img1" alt="">
+                                <img src="assets/img/customer/customar2.png" class="customar-img2" alt="">
+                                <div class="service-experience heartbeat">
                                     <h3>
-                                        <fmt:message key="our.rooms" bundle="${localeBundle}"/>
+                                        <fmt:message key="room.price"
+                                                     bundle="${localeBundle}"/>: ${pageRoom.price}
                                     </h3>
                                 </div>
-                                <h3 class="archivment-back">Our Rooms</h3>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <c:forEach items="${roomViewList}" var="roomSorted">
-                            <div class="col-xl-4 col-lg-6 col-md-6">
-                                <!-- Single Room -->
-                                <div class="single-room mb-50">
-                                    <div class="room-img">
-                                        <a href="rooms-view.command?bed-size=${roomSorted.bedSize}"><img
-                                                src="assets/img/rooms/room1.jpg" alt=""></a>
-                                    </div>
-                                    <div class="room-caption">
-                                        <h3>
-                                            <a href="rooms-view.command?bed-size=${roomSorted.bedSize}">${roomSorted.bedSize}</a>
-                                        </h3>
-                                        <h5>
-                                            <fmt:message key="adults.capacity" bundle="${localeBundle}"/>: 1
-                                            <fmt:message key="to" bundle="${localeBundle}"/> ${roomSorted.maxAdults}
-                                        </h5>
-                                        <h5>
-                                            <fmt:message key="children.capacity" bundle="${localeBundle}"/>: 0
-                                            <fmt:message key="to" bundle="${localeBundle}"/> ${roomSorted.maxChildren}
-                                        </h5>
-                                        <div class="per-night">
-                                        <span>$${roomSorted.minPrice}<span> /
-                                             <fmt:message key="night" bundle="${localeBundle}"/>
-                                            </span>
-                                            <fmt:message key="to" bundle="${localeBundle}"/>
-                                        </span>
-                                            <span>$${roomSorted.maxPrice}<span> /
-                                                <fmt:message key="night" bundle="${localeBundle}"/>
-                                            </span>
-                                            </span>
-                                        </div>
+                        <div class="col-xl-4 col-lg-4">
+                            <div class="customer-caption">
+                                <span>
+                                    <fmt:message key="room" bundle="${localeBundle}"/> № ${pageRoom.number}
+                                </span>
+                                <h2>
+                                    <fmt:message key="bed.size" bundle="${localeBundle}"/>: ${pageRoom.bedSize}
+                                </h2>
+                                <div class="caption-details">
+                                    <p class="pera-dtails">${pageRoom.about}</p>
+                                    <p>
+                                        <fmt:message key="adults.capacity"
+                                                     bundle="${localeBundle}"/>: ${pageRoom.adultCapacity}
+                                        <br>
+                                        <fmt:message key="children.capacity"
+                                                     bundle="${localeBundle}"/>: ${pageRoom.childrenCapacity}
+                                    </p>
+                                    <div class="caption-details">
+                                        <a href="rooms-view.command?bed-size=${pageRoom.bedSize}" class="btn more-btn1">Back to Rooms<i class="ti-angle-right"></i> </a>
                                     </div>
                                 </div>
                             </div>
-                        </c:forEach>
+
+                        </div>
                     </div>
                 </div>
             </section>
-            <!-- Room End -->
+            <!-- One Room Description End-->
 
             <!-- Gallery img Start-->
-            <div class="gallery-area fix">
+            <div class="gallery-area g-padding fix">
                 <div class="container-fluid p-0">
                     <div class="row">
                         <div class="col-md-12">
@@ -232,4 +197,3 @@
         </main>
     </jsp:body>
 </t:page>
-

@@ -186,6 +186,7 @@ public class UserRepositorySQLImpl implements UserRepository {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 user.setUserID(rs.getInt("user_id"));
+                user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));

@@ -1,16 +1,113 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Khomenko Vadym
-  Date: 27.10.2021
-  Time: 20:16
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
-</body>
-</html>
+<fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale_data" var="localeBundle"/>
+
+<fmt:message key="login" bundle="${localeBundle}" var="pageLoginTitle" scope="page"/>
+<t:page title="${pageLoginTitle}">
+    <jsp:body>
+        <main>
+
+            <!-- slider Area Start-->
+            <div class="slider-area">
+                <div class="single-slider hero-overly slider-height2 d-flex align-items-center"
+                     data-background="assets/img/hero/contact_hero.jpg">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
+                                <div class="hero-caption">
+                                    <span>
+                                        <fmt:message key="register.page.title" bundle="${localeBundle}"/>
+                                    </span>
+                                    <h2><fmt:message key="register" bundle="${localeBundle}"/></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- slider Area End-->
+
+            <!-- Login start-->
+            <section class="room-area customar-padding fix">
+                <div class="container container-fluid p-0">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8">
+                            <form action="register.command" method="post">
+
+                                <!--First Name start-->
+                                <div class="mt-10">
+                                    <input type="text" name="user-first-name" placeholder="First Name"
+                                           pattern="[A-Za-z\u0400-\u04ff]{1,32}"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required
+                                           class="single-input">
+                                </div>
+                                <!--First Name end-->
+
+                                <!--Last Name start-->
+                                <div class="mt-10">
+                                    <input type="text" name="user-last-name" placeholder="Last Name"
+                                           pattern="[A-Za-z\u0400-\u04ff]{1,32}"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
+                                           class="single-input">
+                                </div>
+                                <!--Last Name end-->
+
+                                <!--Phone start-->
+                                <div class="mt-10">
+                                    <input type="text" name="user-phone" placeholder="380959956781"
+                                           pattern="[0-9]{12}"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = '380959956781'" required
+                                           class="single-input">
+                                </div>
+                                <!--Phone end-->
+
+                                <!--Email start-->
+                                <div class="mt-10">
+                                    <input type="text" name="user-email" placeholder="Email"
+                                           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required
+                                           class="single-input">
+                                </div>
+                                <!--Email end-->
+
+                                <!--Pass one start-->
+                                <div class="mt-10">
+                                    <input type="text" name="user-password" placeholder="Password"
+
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
+                                           required
+                                           class="single-input">
+                                </div>
+                                <!--Pass one end-->
+
+                                <!--Pass two start-->
+                                <div class="mt-10">
+                                    <input type="text" name="user-password" placeholder="Password"
+
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
+                                           required
+                                           class="single-input">
+                                </div>
+                                <!--Pass two end-->
+
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                                    <fmt:message key="register" bundle="${localeBundle}"/>
+                                </button>
+                                <a href="login.command">
+                                    <fmt:message key="login" bundle="${localeBundle}"/>
+                                </a>
+                                <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Login end-->
+
+        </main>
+    </jsp:body>
+</t:page>

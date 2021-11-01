@@ -13,16 +13,20 @@ public class AuthenticationFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-
         String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-
-        if (path.startsWith("/login.command") || path.startsWith("/authenticate.command")
-                || path.startsWith("/register-user-page.command") || path.startsWith("/assets")
-                || path.startsWith("/index.command") || path.startsWith("/locale.command")) {
+        if (
+                path.startsWith("/assets")
+                || path.startsWith("/locale.command")
+                || path.startsWith("/index.command")
+                || path.startsWith("/rooms-view.command")
+                || path.startsWith("/room.command")
+                || path.startsWith("/login.command")
+                || path.startsWith("/authenticate.command")
+                || path.startsWith("/register-user-page.command")
+        ) {
             chain.doFilter(request, response);
             return;
         }
-
         String email = (String) httpRequest.getSession().getAttribute("userEmail");
         if (email == null || email.isEmpty()) {
             ((HttpServletResponse) response).sendRedirect("index.command");

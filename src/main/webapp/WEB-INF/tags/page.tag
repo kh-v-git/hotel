@@ -5,13 +5,16 @@
 <%@attribute name="title" required="true" type="java.lang.String" %>
 <%@attribute name="skipHeader" type="java.lang.Boolean" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <fmt:setLocale value="${sessionScope.locale}"/>
+<fmt:setBundle basename="locale_data" var="localeBundle"/>
+
 <!doctype html>
 <html lang="${sessionScope.locale}">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -44,7 +47,7 @@
                     <!-- logo -->
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
-                            <a href="index.jsp"><img class="logo-image" src="assets/img/logo/logo.png" alt=""></a>
+                            <a href="index.command"><img class="logo-image" src="assets/img/logo/logo.png" alt=""></a>
                         </div>
                     </div>
                     <div class="col-xl-6 col-lg-6">
@@ -52,10 +55,23 @@
                         <div class="main-menu f-right d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#">Rooms</a></li>
-                                    <li><a href="login.command">Login</a></li>
+                                    <li><a href="index.command">
+                                        <fmt:message key="home" bundle="${localeBundle}"/>
+                                        </a></li>
+                                    <li><a href="">
+                                        <fmt:message key="rooms" bundle="${localeBundle}"/>
+                                        </a>
+                                        <ul class="submenu">
+                                            <c:forEach items="${roomBedSizeList}" var="roomBedSize">
+                                            <li>
+                                                <a href="rooms-view.command?bed-size=${roomBedSize}">${roomBedSize}</a>
+                                                </c:forEach>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="login.command">
+                                        <fmt:message key="login" bundle="${localeBundle}"/>
+                                        </a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -65,8 +81,9 @@
                             <div class="nice-select">
                                 <span class="current">${"uk_UA" eq (sessionScope.locale) ? "Uk" : "En"}</span>
                                 <ul class="list">
-                                    <li data-value="1" class="option selected focus"> <a href="locale.command?locale=en_US">En</a></li>
-                                    <li data-value="2" class="option"> <a href="locale.command?locale=uk_UA">Uk</a></li>
+                                    <li data-value="1" class="option selected focus"><a
+                                            href="locale.command?locale=en_US">En</a></li>
+                                    <li data-value="2" class="option"><a href="locale.command?locale=uk_UA">Uk</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -77,10 +94,11 @@
                         <div class="mobile_menu d-block d-lg-none"></div>
                         <div class="language-selector d-block d-lg-none">
                             <div class="nice-select">
-                                <span class="current">Eng</span>
+                                <span class="current">${"uk_UA" eq (sessionScope.locale) ? "Uk" : "En"}</span>
                                 <ul class="list">
-                                    <li data-value=" 1" class="option selected focus">Eng</li>
-                                    <li data-value="2" class="option">Ukr</li>
+                                    <li data-value="1" class="option selected focus"><a
+                                            href="locale.command?locale=en_US">En</a></li>
+                                    <li data-value="2" class="option"><a href="locale.command?locale=uk_UA">Uk</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -129,12 +147,6 @@
                         <div class="footer-logo">
                             <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
                         </div>
-                        <div class="footer-social footer-social2">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fas fa-globe"></i></a>
-                            <a href="#"><i class="fab fa-behance"></i></a>
-                        </div>
                         <div class="footer-pera">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;<script>document.write(new Date().getFullYear());</script>
@@ -149,12 +161,22 @@
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-5">
                     <div class="single-footer-caption mb-30">
                         <div class="footer-tittle">
-                            <h4>Quick Links</h4>
+                            <h4>
+                                <fmt:message key="quick.links" bundle="${localeBundle}"/>
+                            </h4>
                             <ul>
-                                <li><a href="#">About Mariana</a></li>
-                                <li><a href="#">Our Rooms</a></li>
-                                <li><a href="#">Our Photo Gallery</a></li>
-                                <li><a href="#">Book Now</a></li>
+                                <li><a href="#">
+                                    <fmt:message key="about" bundle="${localeBundle}"/>
+                                    </a>
+                                </li>
+                                <li><a href="#">
+                                    <fmt:message key="rooms" bundle="${localeBundle}"/>
+                                    </a>
+                                </li>
+                                <li><a href="#">
+                                    <fmt:message key="request.now" bundle="${localeBundle}"/>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -162,7 +184,9 @@
                 <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3">
                     <div class="single-footer-caption mb-30">
                         <div class="footer-tittle">
-                            <h4>Reservations</h4>
+                            <h4>
+                                <fmt:message key="reservation.contacts" bundle="${localeBundle}"/>
+                            </h4>
                             <ul>
                                 <li><a href="tel:3455667889">Tel: 345 5667 889</a></li>
                                 <li><a href="mailto:reservations@epamhotel.com">reservations@epamhotel.com</a></li>
@@ -173,9 +197,14 @@
                 <div class="col-xl-3 col-lg-3 col-md-4  col-sm-5">
                     <div class="single-footer-caption mb-30">
                         <div class="footer-tittle">
-                            <h4>Our Location</h4>
+                            <h4>
+                                <fmt:message key="our.location" bundle="${localeBundle}"/>
+                            </h4>
                             <ul>
-                                <li><a href="https://goo.gl/maps/5cLYvG3hdZteWWbF6">Kudryashova Street, 14B, Kyiv, 03035</a></li>
+                                <li><a href="https://goo.gl/maps/5cLYvG3hdZteWWbF6">
+                                    <fmt:message key="our.address" bundle="${localeBundle}"/>
+                                   </a>
+                                </li>
                             </ul>
                         </div>
                     </div>

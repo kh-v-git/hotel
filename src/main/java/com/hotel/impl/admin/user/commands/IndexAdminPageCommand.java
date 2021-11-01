@@ -1,6 +1,8 @@
-package com.hotel.security.commands;
+package com.hotel.impl.admin.user.commands;
 
 import com.hotel.Command;
+import com.hotel.security.RequiresRole;
+import com.hotel.utils.enums.UserRolesEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -8,18 +10,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
-/**
- * command to view login page
- */
-public class LoginPageCommand implements Command {
-    private static final Logger log = LogManager.getLogger(LoginPageCommand.class);
 
-    /**
-     * Collect data for login.jsp
-     * @param request  http request
-     * @param response http response
-     * @throws Exception maintenance exception
-     */
+@RequiresRole(UserRolesEnum.ADMIN)
+public class IndexAdminPageCommand implements Command {
+    private static final Logger log = LogManager.getLogger(IndexAdminPageCommand.class);
+
+
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String queryString = Optional.ofNullable(request.getQueryString())
@@ -27,9 +23,10 @@ public class LoginPageCommand implements Command {
                 .map(String::trim)
                 .orElse("");
 
+
         request.getSession().setAttribute("pageQuery", queryString);
-        request.getSession().setAttribute("pageCommand", "login.command");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("pages/login.jsp");
+        request.getSession().setAttribute("pageCommand", "secured-admin.command");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("pages/admin/index_admin.jsp");
         requestDispatcher.forward(request, response);
     }
 }

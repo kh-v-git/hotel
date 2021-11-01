@@ -6,7 +6,7 @@ public class Room {
     private int roomID;
     private int number;
     private int adultCapacity;
-    private int childCapacity;
+    private int childrenCapacity;
     private double price;
     private String bedSize;
     private String about;
@@ -43,12 +43,12 @@ public class Room {
         this.adultCapacity = adultCapacity;
     }
 
-    public int getChildCapacity() {
-        return childCapacity;
+    public int getChildrenCapacity() {
+        return childrenCapacity;
     }
 
-    public void setChildCapacity(int childCapacity) {
-        this.childCapacity = childCapacity;
+    public void setChildrenCapacity(int childrenCapacity) {
+        this.childrenCapacity = childrenCapacity;
     }
 
     public double getPrice() {
@@ -72,12 +72,12 @@ public class Room {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Room room = (Room) o;
-        return getRoomID() == room.getRoomID() && getNumber() == room.getNumber() && getAdultCapacity() == room.getAdultCapacity() && getChildCapacity() == room.getChildCapacity() && Double.compare(room.getPrice(), getPrice()) == 0 && getBedSize().equals(room.getBedSize()) && getAbout().equals(room.getAbout());
+        return getRoomID() == room.getRoomID() && getNumber() == room.getNumber() && getAdultCapacity() == room.getAdultCapacity() && getChildrenCapacity() == room.getChildrenCapacity() && Double.compare(room.getPrice(), getPrice()) == 0 && getBedSize().equals(room.getBedSize()) && getAbout().equals(room.getAbout());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getNumber(), getAdultCapacity(), getChildCapacity(), getPrice(), getBedSize(), getAbout());
+        return Objects.hash(getNumber(), getAdultCapacity(), getChildrenCapacity(), getPrice(), getBedSize(), getAbout());
     }
 
     @Override
@@ -85,7 +85,7 @@ public class Room {
         return "Room{" +
                 "number=" + number +
                 ", adultCapacity=" + adultCapacity +
-                ", childCapacity=" + childCapacity +
+                ", childCapacity=" + childrenCapacity +
                 ", price=" + price +
                 ", bedSize='" + bedSize + '\'' +
                 ", about='" + about + '\'' +

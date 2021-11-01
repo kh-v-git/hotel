@@ -13,7 +13,7 @@ public class HashStringTest {
         //
         // Given
         //
-        String pass = "qwerty123qwerty";
+       String pass = "qwerty123qwerty";
         //
         // When
         //

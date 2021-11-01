@@ -1,7 +1,14 @@
 package com.hotel;
 
+import com.hotel.impl.admin.user.commands.IndexAdminPageCommand;
+import com.hotel.impl.admin.user.commands.IndexManagerPageCommand;
+import com.hotel.impl.admin.user.commands.IndexUserPageCommand;
 import com.hotel.impl.common.LocaleCommand;
+import com.hotel.impl.room.command.RoomGuestPageCommand;
+import com.hotel.impl.room.command.RoomCategoryGuestPageCommand;
 import com.hotel.security.RequiresRole;
+import com.hotel.security.commands.AuthenticateCommand;
+import com.hotel.security.commands.RegisterUserPageCommand;
 import com.hotel.utils.enums.UserRolesEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,10 +34,14 @@ public class RouterServlet extends HttpServlet {
         commands.put("/index.command", new IndexPageCommand());
         commands.put("/locale.command", new LocaleCommand() );
         commands.put("/login.command", new LoginPageCommand());
+        commands.put("/rooms-view.command", new RoomCategoryGuestPageCommand());
+        commands.put("/room.command", new RoomGuestPageCommand());
+        commands.put("/authenticate.command", new AuthenticateCommand());
+        commands.put("/secured-admin.command", new IndexAdminPageCommand());
+        commands.put("/secured-manager.command", new IndexManagerPageCommand());
+        commands.put("/secured-user.command", new IndexUserPageCommand());
+       commands.put("/register-user-page.command", new RegisterUserPageCommand());
         //commands.put("/register.command", new RegisterCommand());
-       // commands.put("/register-user-page.command", new RegisterUserPageCommand());
-       //commands.put("/authenticate.command", new AuthenticateCommand());
-        //commands.put("/secured.command", new SecuredUserPageCommand());
        // commands.put("/logout.command", new LogoutCommand());
     }
 
@@ -61,7 +72,7 @@ public class RouterServlet extends HttpServlet {
             for (Annotation annotation : annotations) {
                 if (annotation instanceof RequiresRole) {
                     UserRolesEnum requiredRole = ((RequiresRole) annotation).value();
-                    String existingRoleString = (String) request.getSession().getAttribute("role");
+                    String existingRoleString = (String) request.getSession().getAttribute("userRole");
                     UserRolesEnum existingRole = UserRolesEnum.valueOf(existingRoleString.toUpperCase());
 
                     if (requiredRole != existingRole) {
@@ -69,7 +80,6 @@ public class RouterServlet extends HttpServlet {
                     }
                 }
             }
-
             try {
                 command.execute(request, response);
             } catch (Exception e) {

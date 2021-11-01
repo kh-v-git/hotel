@@ -8,14 +8,12 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
-/**
- * command to view login page
- */
-public class LoginPageCommand implements Command {
-    private static final Logger log = LogManager.getLogger(LoginPageCommand.class);
+
+public class RegisterUserPageCommand implements Command {
+    private static final Logger log = LogManager.getLogger(RegisterUserPageCommand.class);
 
     /**
-     * Collect data for login.jsp
+     * Collect data for register.jsp
      * @param request  http request
      * @param response http response
      * @throws Exception maintenance exception
@@ -28,8 +26,8 @@ public class LoginPageCommand implements Command {
                 .orElse("");
 
         request.getSession().setAttribute("pageQuery", queryString);
-        request.getSession().setAttribute("pageCommand", "login.command");
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("pages/login.jsp");
+        request.getSession().setAttribute("pageCommand", "register-user-page.command");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("pages/register.jsp");
         requestDispatcher.forward(request, response);
     }
 }

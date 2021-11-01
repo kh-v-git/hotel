@@ -18,14 +18,24 @@ public class LocaleCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String pageCommand = Optional.ofNullable(request.getSession().getAttribute("pageCommand"))
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("index.command");
+        String queryString = Optional.ofNullable(request.getSession().getAttribute("pageQuery"))
+                .map(Object::toString)
+                .map(String::trim)
+                .map(query -> "?" + query)
+                .orElse("");
+
 
         String locale = Optional.ofNullable(request.getParameter("locale"))
                 .map(Object::toString)
                 .map(String::trim)
                 .orElse("en_US");
-        request.getSession().setAttribute("locale", locale);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("index.command");
+        request.getSession().setAttribute("locale", locale);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(pageCommand + queryString);
         requestDispatcher.forward(request, response);
     }
 }
