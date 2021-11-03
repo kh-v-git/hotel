@@ -21,7 +21,7 @@
                                 <div class="col-xl-2 col-lg-2">
                                     <div class="logo">
                                         <a href="secured-admin.command"><img class="logo-image" src="assets/img/logo/logo.png"
-                                                                     alt=""></a>
+                                                                             alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6">
@@ -88,9 +88,9 @@
                             <div class="col-md-11 offset-xl-1 offset-lg-1 offset-md-1">
                                 <div class="hero-caption">
                                     <span>
-                                        <fmt:message key="admin.page.title" bundle="${localeBundle}"/>
+                                        <fmt:message key="rooms.page.title" bundle="${localeBundle}"/>
                                     </span>
-                                    <h2><fmt:message key="admin" bundle="${localeBundle}"/></h2>
+                                    <h2><fmt:message key="rooms" bundle="${localeBundle}"/></h2>
                                 </div>
                             </div>
                         </div>
@@ -102,46 +102,26 @@
             <!--Users table -->
             <div class="whole-wrap">
                 <div class="container box_1170">
-                    <div class="col-lg-4">
-                        <div class="blog_right_sidebar">
-                            <aside class="single_sidebar_widget search_widget">
-                                <form action="#">
-                                    <div class="form-group">
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder='Search Keyword'
-                                                   onfocus="this.placeholder = ''"
-                                                   onblur="this.placeholder = 'Search Keyword'">
-                                            <div class="input-group-append">
-                                                <button class="btn" type="button"><i class="ti-search"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                            type="submit">Search</button>
-                                </form>
-                            </aside>
-                        </div>
-                    </div>
                     <div class="section-top-border">
-                        <h3 class="mb-30">Users</h3>
+                        <h3 class="mb-30">Rooms</h3>
                         <div class="progress-table-wrap">
                             <div class="progress-table">
                                 <div class="table-head">
-                                    <div class="serial">id</div>
-                                    <div class="visit">Email</div>
-                                    <div class="visit">First Name</div>
-                                    <div class="visit">Last Name</div>
-                                    <div class="visit">Role</div>
-                                    <div class="visit">Status</div>
+                                    <div class="serial">ID</div>
+                                    <div class="visit">Number</div>
+                                    <div class="visit">Adults</div>
+                                    <div class="visit">Children</div>
+                                    <div class="visit">Price</div>
+                                    <div class="visit">Bed Size</div>
                                 </div>
-                                <c:forEach items="${userList}" var="user">
+                                <c:forEach items="${roomList}" var="room">
                                     <div class="table-row">
-                                        <div class="serial">${user.userID}</div>
-                                        <div class="visit"><a href="admin-user-page.command?userId=${user.userID}">${user.email}</a></div>
-                                        <div class="visit">${user.firstName}</div>
-                                        <div class="visit">${user.lastName}</div>
-                                        <div class="visit">${user.role}</div>
-                                        <div class="visit">${user.status}</div>
+                                        <div class="serial">${room.roomID}</div>
+                                        <div class="visit"><a href="admin-room-page.command?roomId=${room.roomID}">${room.number}</a></div>
+                                        <div class="visit">${room.adultCapacity}</div>
+                                        <div class="visit">${room.childrenCapacity}</div>
+                                        <div class="visit">${room.price}</div>
+                                        <div class="visit">${room.bedSize}</div>
                                     </div>
                                 </c:forEach>
                             </div>
@@ -149,7 +129,6 @@
                     </div>
                 </div>
             </div>
-
         </main>
     </jsp:body>
 </t:page>

@@ -14,7 +14,7 @@ public class UserService {
         return userRepository.getUserList(searchText, searchParametersList);
     }
 
-    public boolean setRoom(User user) {
+    public boolean setUser(User user) {
         return userRepository.setUser(user);
     }
 
@@ -22,7 +22,7 @@ public class UserService {
         return userRepository.deleteUser(id);
     }
 
-    public boolean updateRoom(User user) {
+    public boolean updateUser(User user) {
         return userRepository.updateUser(user);
     }
 

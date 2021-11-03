@@ -6,7 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+/**
+ * command to  logout.
+ */
 public class LogoutCommand implements Command {
     private static final Logger log = LogManager.getLogger(LogoutCommand.class);
 

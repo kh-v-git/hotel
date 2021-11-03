@@ -35,6 +35,7 @@ public class IndexPageCommand implements Command {
                 .map(Object::toString)
                 .map(String::trim)
                 .orElse("");
+
         List<RoomView> roomViewList = mainActivityProcess();
         List<String> roomBedSizeList = new ArrayList<>(roomViewList.stream().map(RoomView::getBedSize).collect(Collectors.toList()));
         int maxAdultsCapacity = roomViewList.stream().mapToInt(RoomView::getMaxAdults).max().orElse(0);

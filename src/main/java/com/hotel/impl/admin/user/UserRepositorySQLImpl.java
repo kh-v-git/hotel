@@ -48,6 +48,7 @@ public class UserRepositorySQLImpl implements UserRepository {
                 user = new User();
                 user.setUserID(rs.getInt("user_id"));
                 user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
                 user.setPhone(rs.getString("phone"));

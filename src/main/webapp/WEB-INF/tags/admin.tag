@@ -37,7 +37,6 @@
     <title>${title}</title>
 </head>
 <body>
-
 <c:if test="${!skipHeader}">
     <c:if test="${not empty errorPage}">
         <div class="genric-btn danger radius">
@@ -95,15 +94,15 @@
                             <ul>
                                 <li><a href="#">
                                     <fmt:message key="about" bundle="${localeBundle}"/>
-                                    </a>
+                                </a>
                                 </li>
                                 <li><a href="#">
                                     <fmt:message key="rooms" bundle="${localeBundle}"/>
-                                    </a>
+                                </a>
                                 </li>
                                 <li><a href="#">
                                     <fmt:message key="request.now" bundle="${localeBundle}"/>
-                                    </a>
+                                </a>
                                 </li>
                             </ul>
                         </div>
@@ -131,7 +130,7 @@
                             <ul>
                                 <li><a href="https://goo.gl/maps/5cLYvG3hdZteWWbF6">
                                     <fmt:message key="our.address" bundle="${localeBundle}"/>
-                                   </a>
+                                </a>
                                 </li>
                             </ul>
                         </div>
@@ -183,3 +182,4 @@
 
 </body>
 </html>
+

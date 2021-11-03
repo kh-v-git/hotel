@@ -13,8 +13,8 @@ import java.security.spec.InvalidKeySpecException;
  * Hash user password using custom salt from application.properties file
  * with PBKDF2WithHmacSHA512
  */
-public class PasswordImpl {
-    private static final Logger log = LogManager.getLogger(PasswordImpl.class);
+public class PasswordHashService {
+    private static final Logger log = LogManager.getLogger(PasswordHashService.class);
 
     private static String propsFile = "application.properties";
     private static String passSaltProps = "password.salt";

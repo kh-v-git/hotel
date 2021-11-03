@@ -7,7 +7,7 @@ import com.hotel.impl.admin.user.UserRepository;
 import com.hotel.impl.admin.user.UserRepositorySQLImpl;
 import com.hotel.impl.admin.user.UserService;
 import com.hotel.utils.DataPatternValidation;
-import com.hotel.utils.passwordhash.PasswordImpl;
+import com.hotel.utils.passwordhash.PasswordHashService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -71,7 +71,7 @@ public class AuthenticateCommand implements Command {
             if ("active".equals(authUser.getStatus())) {
                 String hashPassword;
                 try {
-                    hashPassword = PasswordImpl.hashPassword(userPass);
+                    hashPassword = PasswordHashService.hashPassword(userPass);
                     String test = hashPassword;
                     if (userEmail.equals(authUser.getEmail()) && hashPassword.equals(authUser.getPassword())) {
                         authRequest.getSession().setAttribute("userRole", authUser.getRole());

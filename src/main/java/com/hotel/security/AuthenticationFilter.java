@@ -23,6 +23,7 @@ public class AuthenticationFilter implements Filter {
                 || path.startsWith("/login.command")
                 || path.startsWith("/authenticate.command")
                 || path.startsWith("/register-user-page.command")
+                || path.startsWith("/register.command")
         ) {
             chain.doFilter(request, response);
             return;
@@ -32,7 +33,6 @@ public class AuthenticationFilter implements Filter {
             ((HttpServletResponse) response).sendRedirect("index.command");
             return;
         }
-
         chain.doFilter(request, response);
     }
 }

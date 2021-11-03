@@ -1,5 +1,6 @@
 package com.hotel;
 
+import com.hotel.impl.admin.room.commands.RoomsAdminIndexCommand;
 import com.hotel.impl.admin.user.commands.IndexAdminPageCommand;
 import com.hotel.impl.admin.user.commands.IndexManagerPageCommand;
 import com.hotel.impl.admin.user.commands.IndexUserPageCommand;
@@ -7,13 +8,10 @@ import com.hotel.impl.common.LocaleCommand;
 import com.hotel.impl.room.command.RoomGuestPageCommand;
 import com.hotel.impl.room.command.RoomCategoryGuestPageCommand;
 import com.hotel.security.RequiresRole;
-import com.hotel.security.commands.AuthenticateCommand;
-import com.hotel.security.commands.RegisterUserPageCommand;
+import com.hotel.security.commands.*;
 import com.hotel.utils.enums.UserRolesEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.hotel.security.commands.IndexPageCommand;
-import com.hotel.security.commands.LoginPageCommand;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Router Servlet
+ */
 @WebServlet({"*.command"})
 public class RouterServlet extends HttpServlet {
     private static final Logger log = LogManager.getLogger(RouterServlet.class);
@@ -32,17 +32,18 @@ public class RouterServlet extends HttpServlet {
 
     static {
         commands.put("/index.command", new IndexPageCommand());
-        commands.put("/locale.command", new LocaleCommand() );
+        commands.put("/locale.command", new LocaleCommand());
         commands.put("/login.command", new LoginPageCommand());
+        commands.put("/logout.command", new LogoutCommand());
         commands.put("/rooms-view.command", new RoomCategoryGuestPageCommand());
         commands.put("/room.command", new RoomGuestPageCommand());
         commands.put("/authenticate.command", new AuthenticateCommand());
         commands.put("/secured-admin.command", new IndexAdminPageCommand());
         commands.put("/secured-manager.command", new IndexManagerPageCommand());
         commands.put("/secured-user.command", new IndexUserPageCommand());
-       commands.put("/register-user-page.command", new RegisterUserPageCommand());
-        //commands.put("/register.command", new RegisterCommand());
-       // commands.put("/logout.command", new LogoutCommand());
+        commands.put("/register-user-page.command", new RegisterUserPageCommand());
+        commands.put("/secured-admin-rooms.command", new RoomsAdminIndexCommand());
+        commands.put("/register.command", new RegisterCommand());
     }
 
     @Override
@@ -83,7 +84,7 @@ public class RouterServlet extends HttpServlet {
             try {
                 command.execute(request, response);
             } catch (Exception e) {
-                log.error("Error in com.hotel.RouterServlet commands", e );
+                log.error("Error in com.hotel.RouterServlet commands", e);
                 throw new ServletException("Failed to execute command", e);
             }
         } else {

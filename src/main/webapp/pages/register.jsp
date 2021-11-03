@@ -41,8 +41,10 @@
                                 <!--First Name start-->
                                 <div class="mt-10">
                                     <input type="text" name="user-first-name" placeholder="First Name"
-                                           pattern="[A-Za-z\u0400-\u04ff]{1,32}"
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" required
+                                           pattern="^[A-Za-z\u0400-\u04ff]{1,32}$"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'"
+                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have max 32 letters' : '');"
+                                           required
                                            class="single-input">
                                 </div>
                                 <!--First Name end-->
@@ -50,8 +52,10 @@
                                 <!--Last Name start-->
                                 <div class="mt-10">
                                     <input type="text" name="user-last-name" placeholder="Last Name"
-                                           pattern="[A-Za-z\u0400-\u04ff]{1,32}"
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" required
+                                           pattern="^[A-Za-z\u0400-\u04ff]{1,32}$"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'"
+                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have max 32 letters' : '');"
+                                           required
                                            class="single-input">
                                 </div>
                                 <!--Last Name end-->
@@ -59,8 +63,10 @@
                                 <!--Phone start-->
                                 <div class="mt-10">
                                     <input type="text" name="user-phone" placeholder="380959956781"
-                                           pattern="[0-9]{12}"
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = '380959956781'" required
+                                           pattern="^[0-9]{12}$"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = '380959956781'"
+                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have 12 digits' : '');"
+                                           required
                                            class="single-input">
                                 </div>
                                 <!--Phone end-->
@@ -68,31 +74,47 @@
                                 <!--Email start-->
                                 <div class="mt-10">
                                     <input type="text" name="user-email" placeholder="Email"
-                                           pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}"
+                                           pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required
+                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must be valid email' : '');"
                                            class="single-input">
                                 </div>
                                 <!--Email end-->
 
                                 <!--Pass one start-->
                                 <div class="mt-10">
-                                    <input type="text" name="user-password" placeholder="Password"
-
-                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
+                                    <input type="password" name="user-password" id="password"
                                            required
+                                           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 8 characters, capital, number' : '');
+                        if(this.checkValidity()) form.user_repeat_password.pattern = this.value;"
+                                           placeholder="Password min 8 characters, capital, number"
                                            class="single-input">
+
                                 </div>
                                 <!--Pass one end-->
 
                                 <!--Pass two start-->
                                 <div class="mt-10">
-                                    <input type="text" name="user-password" placeholder="Password"
-
+                                    <input type="password" name="user-password-repeat" id="user_repeat_password"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'"
                                            required
+                                           pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');
+                        if(this.checkValidity()) form.user_repeat_password.pattern = this.value;"
+                                           placeholder="Repeat password"
                                            class="single-input">
                                 </div>
                                 <!--Pass two end-->
+
+                                <!--About start-->
+                                <div class="mt-10">
+                                    <input type="text" name="user-about" placeholder="About"
+                                           pattern="^[A-Za-z\u0400-\u04ff]{1,32}$"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'About yourself'"
+                                           class="single-input">
+                                </div>
+                                <!--About end-->
 
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                                     <fmt:message key="register" bundle="${localeBundle}"/>

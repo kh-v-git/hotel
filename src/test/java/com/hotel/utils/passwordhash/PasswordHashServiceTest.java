@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public class PasswordImplTest {
+public class PasswordHashServiceTest {
     //Generated outside from app
     public static final String TEST_HASH = "f66555b0e9a5ef1402673b6df12a1f68d19300c84630b50eb5c086e76b2c06dd4350e0359faef6118b5ffab3053939e227113c26289f5e7ea1aad063e3c8a7a8";
 
@@ -17,7 +17,7 @@ public class PasswordImplTest {
         //
         // When
         //
-        String result = PasswordImpl.hashPassword(pass);
+        String result = PasswordHashService.hashPassword(pass);
         //
         // Then
         //
