@@ -47,9 +47,9 @@ public class RegisterCommand implements Command {
                 return;
             }
         } else {
+            request.setAttribute("errorCommand", "User not registered. Try again.");
             log.log(Level.DEBUG, "User data validation failed");
         }
-        request.setAttribute("errorCommand", "User not registered. Try again.");
         pageLocale(request, "register-user-page.command");
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("register-user-page.command");
         requestDispatcher.forward(request, response);

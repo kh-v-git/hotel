@@ -22,7 +22,8 @@ public class UserRepositorySQLImpl implements UserRepository {
     private static final String GET_USER_BY_ID = "SELECT * FROM user WHERE user_id='%d'";
     private static final String DELETE_USER_BY_ID = "DELETE FROM user WHERE user_id='%d'";
     private static final String UPDATE_USER_BY_ID = "UPDATE user SET email='%s', password='%s', first_name='%s', last_name='%s', phone='%s', role='%s', status='%s', about='%s' WHERE user_id='%d'";
-    public static final String FIND_ALL_FROM_USER_EMAIL = "SELECT * FROM user WHERE email='%s'";
+    private static final String UPDATE_USER_BY_ID_NO_PASS = "UPDATE user SET email='%s', first_name='%s', last_name='%s', phone='%s', role='%s', status='%s', about='%s' WHERE user_id='%d'";
+    private static final String FIND_ALL_FROM_USER_EMAIL = "SELECT * FROM user WHERE email='%s'";
 
     private Connection con;
     private PreparedStatement pstmt;
@@ -98,11 +99,12 @@ public class UserRepositorySQLImpl implements UserRepository {
     }
 
     @Override
-    public User getUser(int id) {
+    public Optional<User> getUser(int id) {
         con = null;
         pstmt = null;
         rs = null;
         user = new User();
+        boolean found = false;
         try {
             con = DataBaseManager.getInstance().getConnection();
             con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
@@ -112,12 +114,14 @@ public class UserRepositorySQLImpl implements UserRepository {
             if (rs.next()) {
                 user.setUserID(rs.getInt("user_id"));
                 user.setPassword(rs.getString("password"));
+                user.setEmail(rs.getString("email"));
                 user.setFirstName(rs.getString("first_name"));
                 user.setLastName(rs.getString("last_name"));
                 user.setPhone(rs.getString("phone"));
                 user.setRole(rs.getString("role"));
                 user.setStatus(rs.getString("status"));
                 user.setAbout(rs.getString("about"));
+                found = true;
             }
         } catch (SQLException ex) {
             log.log(Level.ERROR, "Failed get Room by ID from DB", ex);
@@ -126,7 +130,11 @@ public class UserRepositorySQLImpl implements UserRepository {
             close(pstmt);
             close(con);
         }
-        return user;
+        if (found) {
+            return Optional.of(user);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
@@ -157,8 +165,14 @@ public class UserRepositorySQLImpl implements UserRepository {
         try {
             con = DataBaseManager.getInstance().getConnection();
             con.setTransactionIsolation(Connection.TRANSACTION_REPEATABLE_READ);
-            sqlInsertion = String.format(UPDATE_USER_BY_ID, user.getEmail(), user.getPassword(), user.getFirstName(),
-                    user.getLastName(), user.getPhone(), user.getRole(), user.getStatus(), user.getAbout(), user.getUserID());
+
+            if (user.getPassword() == null || user.getPassword().isEmpty()) {
+                sqlInsertion = String.format(UPDATE_USER_BY_ID_NO_PASS, user.getEmail(), user.getFirstName(),
+                        user.getLastName(), user.getPhone(), user.getRole(), user.getStatus(), user.getAbout(), user.getUserID());
+            } else {
+                sqlInsertion = String.format(UPDATE_USER_BY_ID, user.getEmail(), user.getPassword(), user.getFirstName(),
+                        user.getLastName(), user.getPhone(), user.getRole(), user.getStatus(), user.getAbout(), user.getUserID());
+            }
             pstmt = con.prepareStatement(sqlInsertion);
             pstmt.executeUpdate();
             con.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);

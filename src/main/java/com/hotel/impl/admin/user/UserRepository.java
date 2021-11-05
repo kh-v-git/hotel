@@ -8,7 +8,7 @@ public interface UserRepository {
 
     boolean setUser(User user);
 
-    User getUser(int id);
+    Optional<User> getUser(int id);
 
     boolean deleteUser(int id);
 

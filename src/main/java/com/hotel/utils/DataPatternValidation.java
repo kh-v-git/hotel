@@ -72,6 +72,101 @@ public class DataPatternValidation {
         }
         return checkStatus;
     }
+
+
+    public static boolean PhoneCheck (String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, PHONE_PATTERN);
+    }
+    public static boolean NameCheck (String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, NAME_PATTERN);
+    }
+    public static boolean StringCheck (String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, STRING_PATTERN);
+    }
+    public static boolean CardCheck (String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, CARD_PATTERN);
+    }
+    public static boolean IntCheck (String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, INT_PATTERN);
+    }
+    public static boolean DecCheck(String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, DEC_PATTERN);
+    }
+    public static boolean EmailCheck (String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, EMAIL_PATTERN);
+    }
+    public static boolean PasswordCheck (String dataInput) {
+        String data = Optional.ofNullable(dataInput)
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+        if (data.isEmpty()) {
+            log.log(Level.DEBUG, String.format("User input data for param '%s' is empty", dataInput));
+            return false;
+        }
+        return patternCheck(data, PASSWORD_PATTERN);
+    }
+
+
+
+
+
     private static boolean patternCheck (String inpData, String pattern) {
          String dataCheck = Optional.ofNullable(inpData)
                 .map(Object::toString)

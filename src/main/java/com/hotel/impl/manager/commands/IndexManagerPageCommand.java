@@ -1,4 +1,4 @@
-package com.hotel.impl.admin.user.commands;
+package com.hotel.impl.manager.commands;
 
 import com.hotel.Command;
 import com.hotel.security.RequiresRole;

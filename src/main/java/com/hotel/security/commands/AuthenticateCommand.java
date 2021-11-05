@@ -72,7 +72,6 @@ public class AuthenticateCommand implements Command {
                 String hashPassword;
                 try {
                     hashPassword = PasswordHashService.hashPassword(userPass);
-                    String test = hashPassword;
                     if (userEmail.equals(authUser.getEmail()) && hashPassword.equals(authUser.getPassword())) {
                         authRequest.getSession().setAttribute("userRole", authUser.getRole());
                         authRequest.getSession().setAttribute("userStatus", authUser.getStatus());

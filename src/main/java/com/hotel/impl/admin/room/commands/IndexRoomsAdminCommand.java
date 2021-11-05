@@ -15,7 +15,7 @@ import java.util.Optional;
 /**
  * command to view rooms on index_admin.jsp
  */
-public class RoomsAdminIndexCommand implements Command {
+public class IndexRoomsAdminCommand implements Command {
     /**
      * Collect data rooms list for index_admin.jsp
      *

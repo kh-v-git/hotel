@@ -1,10 +1,9 @@
 package com.hotel;
 
-import com.hotel.impl.admin.room.commands.RoomsAdminIndexCommand;
-import com.hotel.impl.admin.user.commands.IndexAdminPageCommand;
-import com.hotel.impl.admin.user.commands.IndexManagerPageCommand;
-import com.hotel.impl.admin.user.commands.IndexUserPageCommand;
+import com.hotel.impl.admin.room.commands.IndexRoomsAdminCommand;
+import com.hotel.impl.admin.user.commands.*;
 import com.hotel.impl.common.LocaleCommand;
+import com.hotel.impl.manager.commands.IndexManagerPageCommand;
 import com.hotel.impl.room.command.RoomGuestPageCommand;
 import com.hotel.impl.room.command.RoomCategoryGuestPageCommand;
 import com.hotel.security.RequiresRole;
@@ -35,15 +34,20 @@ public class RouterServlet extends HttpServlet {
         commands.put("/locale.command", new LocaleCommand());
         commands.put("/login.command", new LoginPageCommand());
         commands.put("/logout.command", new LogoutCommand());
+        commands.put("/register.command", new RegisterCommand());
         commands.put("/rooms-view.command", new RoomCategoryGuestPageCommand());
         commands.put("/room.command", new RoomGuestPageCommand());
         commands.put("/authenticate.command", new AuthenticateCommand());
         commands.put("/secured-admin.command", new IndexAdminPageCommand());
+        commands.put("/admin-user-edit.command", new UserEditAdminPageCommand());
+        commands.put("/user-admin-update.command", new UserUpdateAdminCommand());
+        commands.put("/user-admin-delete.command", new UserDeleteAdminCommand());
+
+
         commands.put("/secured-manager.command", new IndexManagerPageCommand());
         commands.put("/secured-user.command", new IndexUserPageCommand());
         commands.put("/register-user-page.command", new RegisterUserPageCommand());
-        commands.put("/secured-admin-rooms.command", new RoomsAdminIndexCommand());
-        commands.put("/register.command", new RegisterCommand());
+        commands.put("/secured-admin-rooms.command", new IndexRoomsAdminCommand());
     }
 
     @Override
@@ -92,5 +96,4 @@ public class RouterServlet extends HttpServlet {
             throw new ServletException("com.hotel.Command not found");
         }
     }
-
 }

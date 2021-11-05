@@ -26,7 +26,7 @@ public class UserService {
         return userRepository.updateUser(user);
     }
 
-    public User getUser(int id) {
+    public Optional<User> getUser(int id) {
         return userRepository.getUser(id);
     }
 

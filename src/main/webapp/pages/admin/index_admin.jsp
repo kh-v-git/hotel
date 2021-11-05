@@ -105,7 +105,7 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
-                                <form action="#">
+                                <form action="">
                                     <div class="form-group">
                                         <div class="input-group mb-3">
                                             <input type="text" class="form-control" placeholder='Search Keyword'
@@ -137,7 +137,7 @@
                                 <c:forEach items="${userList}" var="user">
                                     <div class="table-row">
                                         <div class="serial">${user.userID}</div>
-                                        <div class="visit"><a href="admin-user-page.command?userId=${user.userID}">${user.email}</a></div>
+                                        <div class="visit"><a href="admin-user-edit.command?user-id=${user.userID}">${user.email}</a></div>
                                         <div class="visit">${user.firstName}</div>
                                         <div class="visit">${user.lastName}</div>
                                         <div class="visit">${user.role}</div>
