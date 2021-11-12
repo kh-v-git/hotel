@@ -129,7 +129,7 @@
                 <div class="container">
                     <div class="row ">
                         <div class="col-12">
-                            <form action="#">
+                            <form action="login.command" method="post">
                                 <div class="booking-wrap d-flex justify-content-between align-items-center">
 
                                     <!-- select in date -->
@@ -211,7 +211,7 @@
                                     </div>
                                     <!-- Single Select Box -->
                                     <div class="single-select-box pt-45 mb-30">
-                                        <a href="#" class="btn select-btn">
+                                        <a href="login.command" class="btn select-btn">
                                             <fmt:message key="request.now" bundle="${localeBundle}"/>
                                         </a>
                                     </div>
@@ -245,8 +245,9 @@
                                 <!-- Single Room -->
                                 <div class="single-room mb-50">
                                     <div class="room-img">
-                                        <a href="rooms-view.command?bed-size=${roomSorted.bedSize}"><img
-                                                src="assets/img/rooms/room1.jpg" alt=""></a>
+                                        <a href="rooms-view.command?bed-size=${roomSorted.bedSize}">
+                                            <img src="assets/img/rooms/${roomSorted.bedSize}.jpg" alt="">
+                                        </a>
                                     </div>
                                     <div class="room-caption">
                                         <h3>

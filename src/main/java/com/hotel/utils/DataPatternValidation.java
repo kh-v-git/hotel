@@ -4,6 +4,9 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,19 +19,21 @@ public class DataPatternValidation {
 
     private static final String PHONE_PATTERN = "^[0-9]{12}$";
     private static final String NAME_PATTERN = "^(?=.{1,50}$)\\p{L}+(?:[-'\\s]\\p{L}+)*$";
-    private static final String STRING_PATTERN = "^(?=.{1,100}$)\\p{L}+$";
-    private static final String CARD_PATTERN ="^([0-9]{16})$";
-    private static final String INT_PATTERN = "^([0-9]*)$"; ///remake
-    private static final String DEC_PATTERN = "^([0-9]{4}\\.?[0-9]{2})$";  ///remake
+    private static final String STRING_PATTERN = "^(\\p{L}+[\\s]*)+$"; // any letter
+    private static final String CARD_PATTERN = "^([0-9]{16})$";
+    private static final String INT_PATTERN = "^([0-9]+)$";
+    private static final String DEC_PATTERN = "^([0-9]{1,}\\.?[0-9]{2})$";
     //RFC5322
     private static final String EMAIL_PATTERN =
             "^(?:[a-z0-9!#$%&'*+\\=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+\\=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$";
     //Minimum eight characters, at least one letter and one number
     private static final String PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$";
+
     /**
      * Check String data for matching pattern
+     *
      * @param dataInput Input string to be checked
-     * @param param Type of data
+     * @param param     Type of data
      * @return Check result. TRUE when data matches param`s pattern.
      */
     public static boolean checkInputData(String dataInput, String param) {
@@ -74,7 +79,7 @@ public class DataPatternValidation {
     }
 
 
-    public static boolean PhoneCheck (String dataInput) {
+    public static boolean phoneCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -85,7 +90,8 @@ public class DataPatternValidation {
         }
         return patternCheck(data, PHONE_PATTERN);
     }
-    public static boolean NameCheck (String dataInput) {
+
+    public static boolean nameCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -96,7 +102,8 @@ public class DataPatternValidation {
         }
         return patternCheck(data, NAME_PATTERN);
     }
-    public static boolean StringCheck (String dataInput) {
+
+    public static boolean stringCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -107,7 +114,8 @@ public class DataPatternValidation {
         }
         return patternCheck(data, STRING_PATTERN);
     }
-    public static boolean CardCheck (String dataInput) {
+
+    public static boolean cardCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -118,7 +126,8 @@ public class DataPatternValidation {
         }
         return patternCheck(data, CARD_PATTERN);
     }
-    public static boolean IntCheck (String dataInput) {
+
+    public static boolean intCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -129,7 +138,8 @@ public class DataPatternValidation {
         }
         return patternCheck(data, INT_PATTERN);
     }
-    public static boolean DecCheck(String dataInput) {
+
+    public static boolean decCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -140,7 +150,8 @@ public class DataPatternValidation {
         }
         return patternCheck(data, DEC_PATTERN);
     }
-    public static boolean EmailCheck (String dataInput) {
+
+    public static boolean emailCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -151,7 +162,8 @@ public class DataPatternValidation {
         }
         return patternCheck(data, EMAIL_PATTERN);
     }
-    public static boolean PasswordCheck (String dataInput) {
+
+    public static boolean passwordCheck(String dataInput) {
         String data = Optional.ofNullable(dataInput)
                 .map(Object::toString)
                 .map(String::trim)
@@ -163,12 +175,18 @@ public class DataPatternValidation {
         return patternCheck(data, PASSWORD_PATTERN);
     }
 
+    public static boolean dateCheck(String dataInput) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate.parse(dataInput, formatter).atStartOfDay();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
-
-
-
-    private static boolean patternCheck (String inpData, String pattern) {
-         String dataCheck = Optional.ofNullable(inpData)
+    private static boolean patternCheck(String inpData, String pattern) {
+        String dataCheck = Optional.ofNullable(inpData)
                 .map(Object::toString)
                 .map(String::trim)
                 .orElse("");

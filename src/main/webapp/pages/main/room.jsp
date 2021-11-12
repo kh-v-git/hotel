@@ -38,7 +38,7 @@
                 <div class="container">
                     <div class="row ">
                         <div class="col-12">
-                            <form action="#" method="post">
+                            <form action="login.command" method="post">
                                 <div class="booking-wrap d-flex justify-content-between align-items-center">
 
                                     <!-- select arrival date -->
@@ -116,7 +116,7 @@
                                     </div>
                                     <!-- Single Select Box -->
                                     <div class="single-select-box pt-45 mb-30">
-                                        <a href="#" class="btn select-btn">
+                                        <a href="login.command" class="btn select-btn">
                                             <fmt:message key="book.now" bundle="${localeBundle}"/>
                                         </a>
                                     </div>
@@ -139,7 +139,7 @@
                                 <div class="service-experience heartbeat">
                                     <h3>
                                         <fmt:message key="room.price"
-                                                     bundle="${localeBundle}"/>: ${pageRoom.price}
+                                                     bundle="${localeBundle}"/>: ${pageRoom.price} $
                                     </h3>
                                 </div>
                             </div>
@@ -166,7 +166,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>

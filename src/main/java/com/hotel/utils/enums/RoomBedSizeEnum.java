@@ -14,7 +14,7 @@ public enum RoomBedSizeEnum {
     public static List<String> getRoomBedSizeList() {
         return Arrays.stream(RoomBedSizeEnum.values())
                 .map(RoomBedSizeEnum::name)
-                .map(java.lang.String::toLowerCase)
+                .map(String::toLowerCase)
                 .collect(Collectors.toList());
     }
 }

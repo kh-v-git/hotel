@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum UserRequestStatusEnum {
-    PENDING, PREORDER, APPROVED, CLOSED;
+    REQUESTED, ASSIGNED, DECLINED, APPROVED, EXPIRED;
 
     public static List<String> getUserRequestStatusList() {
         return Arrays.stream(UserRequestStatusEnum.values())
                 .map(UserRequestStatusEnum::name)
-                .map(java.lang.String::toLowerCase)
+                .map(String::toLowerCase)
                 .collect(Collectors.toList());
     }
 }

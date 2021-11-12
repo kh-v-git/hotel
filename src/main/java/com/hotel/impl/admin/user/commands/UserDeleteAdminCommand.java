@@ -1,9 +1,9 @@
 package com.hotel.impl.admin.user.commands;
 
 import com.hotel.Command;
-import com.hotel.impl.admin.user.UserRepository;
-import com.hotel.impl.admin.user.UserRepositorySQLImpl;
-import com.hotel.impl.admin.user.UserService;
+import com.hotel.impl.user.UserRepository;
+import com.hotel.impl.user.UserRepositorySQLImpl;
+import com.hotel.impl.user.UserService;
 import com.hotel.security.RequiresRole;
 import com.hotel.utils.DataPatternValidation;
 import com.hotel.utils.enums.UserRolesEnum;
@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequiresRole(UserRolesEnum.ADMIN)
 public class UserDeleteAdminCommand implements Command {
     private static final Logger log = LogManager.getLogger(UserDeleteAdminCommand.class);
-
     /**
      * delete user by ID
      *
@@ -32,7 +31,7 @@ public class UserDeleteAdminCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String userId = request.getParameter("user-id");
-        if (DataPatternValidation.IntCheck(userId)) {
+        if (DataPatternValidation.intCheck(userId)) {
             if (deleteUser(Integer.parseInt(userId))) {
                 request.setAttribute("statusCommand", "User was deleted");
                 log.log(Level.DEBUG, String.format("User  with id '%d' was deleted by admin", userId));

@@ -1,17 +1,17 @@
 package com.hotel.impl.admin.user.commands;
 
 import com.hotel.Command;
-import com.hotel.impl.admin.user.User;
-import com.hotel.impl.admin.user.UserRepository;
-import com.hotel.impl.admin.user.UserRepositorySQLImpl;
-import com.hotel.impl.admin.user.UserService;
+import com.hotel.impl.user.User;
+import com.hotel.impl.user.UserRepository;
+import com.hotel.impl.user.UserRepositorySQLImpl;
+import com.hotel.impl.user.UserService;
 import com.hotel.security.RequiresRole;
 import com.hotel.utils.DataPatternValidation;
 import com.hotel.utils.enums.UserRolesEnum;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,7 +24,7 @@ public class UserUpdateAdminCommand implements Command {
     private static final Logger log = LogManager.getLogger(UserUpdateAdminCommand.class);
 
     /**
-     * Delete user by ID
+     * Update user info by ID
      *
      * @param request  http request
      * @param response http response
@@ -37,57 +37,57 @@ public class UserUpdateAdminCommand implements Command {
                 request.setAttribute("statusPage", "User update success");
             } else {
                 request.setAttribute("errorPage", "User update failed. DB error.");
+                log.log(Level.DEBUG, "User update failed. DB error." );
             }
         } else {
             request.setAttribute("errorPage", "User update failed. Data error.");
+            log.log(Level.DEBUG, "User update failed. Data error." );
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("secured-admin.command");
-        requestDispatcher.forward(request, response);
-
+        response.sendRedirect("secured-admin.command");
     }
 
     private boolean userDataValidation(HttpServletRequest req) {
         String userId = req.getParameter("user-id");
-        if (!DataPatternValidation.IntCheck(userId)) {
+        if (!DataPatternValidation.intCheck(userId)) {
             req.setAttribute("errorCommand", "User id not valid");
             return false;
         }
 
         String userFirstName = req.getParameter("user-first-name".trim());
-        if (!DataPatternValidation.StringCheck(userFirstName)) {
+        if (!DataPatternValidation.stringCheck(userFirstName)) {
             req.setAttribute("errorCommand", "First Name not valid");
             return false;
         }
         String userLastName = req.getParameter("user-last-name".trim());
-        if (!DataPatternValidation.StringCheck(userLastName)) {
+        if (!DataPatternValidation.stringCheck(userLastName)) {
             req.setAttribute("errorCommand", "Last Name not valid");
             return false;
         }
         String userPhone = req.getParameter("user-phone".trim());
-        if (!DataPatternValidation.PhoneCheck(userPhone)) {
+        if (!DataPatternValidation.phoneCheck(userPhone)) {
             req.setAttribute("errorCommand", "Phone number not valid");
             return false;
         }
         String userEmail = req.getParameter("user-email".trim());
-        if (!DataPatternValidation.EmailCheck(userEmail)) {
+        if (!DataPatternValidation.emailCheck(userEmail)) {
             req.setAttribute("errorCommand", "Email not valid");
             return false;
         }
 
         String userRole = req.getParameter("user-role".trim());
-        if (!DataPatternValidation.StringCheck(userRole)) {
+        if (!DataPatternValidation.stringCheck(userRole)) {
             req.setAttribute("errorCommand", "Role not valid");
             return false;
         }
 
         String userStatus = req.getParameter("user-status".trim());
-        if (!DataPatternValidation.StringCheck(userStatus)) {
+        if (!DataPatternValidation.stringCheck(userStatus)) {
             req.setAttribute("errorCommand", "Status not valid");
             return false;
         }
 
         String userAbout = req.getParameter("user-about".trim());
-        if (!DataPatternValidation.StringCheck(userAbout)) {
+        if (!DataPatternValidation.stringCheck(userAbout)) {
             req.setAttribute("errorCommand", "About not valid");
             return false;
         }

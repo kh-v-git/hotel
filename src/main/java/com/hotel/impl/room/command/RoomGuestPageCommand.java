@@ -2,10 +2,10 @@ package com.hotel.impl.room.command;
 
 import com.hotel.Command;
 import com.hotel.exception.InvalidUserDataInput;
-import com.hotel.impl.admin.room.Room;
-import com.hotel.impl.admin.room.RoomRepository;
-import com.hotel.impl.admin.room.RoomRepositorySQLImpl;
-import com.hotel.impl.admin.room.RoomService;
+import com.hotel.impl.room.Room;
+import com.hotel.impl.room.RoomRepository;
+import com.hotel.impl.room.RoomRepositorySQLImpl;
+import com.hotel.impl.room.RoomService;
 import com.hotel.utils.DataPatternValidation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -44,13 +44,18 @@ public class RoomGuestPageCommand implements Command {
 
     private Room pageDataProcess(String searchParam) throws InvalidUserDataInput {
      Room room = new Room();
-     if (DataPatternValidation.checkInputData(searchParam, "digitalINT")) {
+     if (DataPatternValidation.intCheck(searchParam)) {
          int roomId;
          try {
              roomId = Integer.parseInt(searchParam);
              RoomRepository roomRepository = new RoomRepositorySQLImpl();
              RoomService roomService = new RoomService(roomRepository);
-             room = roomService.getRoom(roomId);
+             Optional<Room> maybeRoom = roomService.getRoom(roomId);
+             if (maybeRoom.isPresent()) {
+                 room = maybeRoom.get();
+             } else {
+                 throw new InvalidUserDataInput ("Room not found");
+             }
          }catch (NumberFormatException ex) {
              log.log(Level.ERROR, "Room id parse error", ex);
              throw new InvalidUserDataInput("Room id parse error", ex);

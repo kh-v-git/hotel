@@ -105,12 +105,12 @@
                     <div class="col-lg-4">
                         <div class="blog_right_sidebar">
                             <aside class="single_sidebar_widget search_widget">
-                                <form action="">
+                                <form action="secured-admin.command" method="post">
                                     <div class="form-group">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder='Search Keyword'
+                                            <input type="text"  name="search-email" class="form-control" placeholder='Search Email'
                                                    onfocus="this.placeholder = ''"
-                                                   onblur="this.placeholder = 'Search Keyword'">
+                                                   onblur="this.placeholder = 'Search Email'">
                                             <div class="input-group-append">
                                                 <button class="btn" type="button"><i class="ti-search"></i></button>
                                             </div>
@@ -149,6 +149,7 @@
                     </div>
                 </div>
             </div>
+            <!--Users table -->
 
         </main>
     </jsp:body>

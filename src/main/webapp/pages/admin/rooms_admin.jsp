@@ -20,7 +20,8 @@
                                 <!-- logo -->
                                 <div class="col-xl-2 col-lg-2">
                                     <div class="logo">
-                                        <a href="secured-admin.command"><img class="logo-image" src="assets/img/logo/logo.png"
+                                        <a href="secured-admin.command"><img class="logo-image"
+                                                                             src="assets/img/logo/logo.png"
                                                                              alt=""></a>
                                     </div>
                                 </div>
@@ -102,12 +103,45 @@
             <!--Users table -->
             <div class="whole-wrap">
                 <div class="container box_1170">
+                    <div class="col-lg-4">
+                        <div class="blog_right_sidebar">
+                            <aside class="single_sidebar_widget search_widget">
+                                <form action="secured-admin-rooms.command" method="post">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" name="search-number" class="form-control"
+                                                   placeholder='Search Number'
+                                            <c:if test="${not empty searchNumber}">
+                                                    value="${searchNumber}"
+                                            </c:if>
+                                                   onfocus="this.placeholder = ''"
+                                                   onblur="this.placeholder = 'Search Number'">
+                                            <div class="input-group-append">
+                                                <button  class="btn" type="button"><i class="ti-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                                            type="submit">Search
+                                    </button>
+                                </form>
+                            </aside>
+                        </div>
+                    </div>
                     <div class="section-top-border">
-                        <h3 class="mb-30">Rooms</h3>
+                        <h3 class="mb-30">
+                            <h2><fmt:message key="rooms" bundle="${localeBundle}"/></h2>
+
+                        </h3>
+                        <!--Add new room button start -->
+                        <div class="button-group-area">
+                            <a href="room-add-new-page-admin.command" class="genric-btn info">Add room</a>
+                        </div>
+                        <!--Add new room button end -->
                         <div class="progress-table-wrap">
                             <div class="progress-table">
                                 <div class="table-head">
-                                    <div class="serial">ID</div>
+                                    <div class="visit">ID</div>
                                     <div class="visit">Number</div>
                                     <div class="visit">Adults</div>
                                     <div class="visit">Children</div>
@@ -116,8 +150,10 @@
                                 </div>
                                 <c:forEach items="${roomList}" var="room">
                                     <div class="table-row">
-                                        <div class="serial">${room.roomID}</div>
-                                        <div class="visit"><a href="admin-room-page.command?roomId=${room.roomID}">${room.number}</a></div>
+                                        <div class="visit">${room.roomID}</div>
+                                        <div class="visit"><a
+                                                href="room-edit-page-admin.command?room-id=${room.roomID}">${room.number}</a>
+                                        </div>
                                         <div class="visit">${room.adultCapacity}</div>
                                         <div class="visit">${room.childrenCapacity}</div>
                                         <div class="visit">${room.price}</div>
@@ -126,9 +162,31 @@
                                 </c:forEach>
                             </div>
                         </div>
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+
+                                <c:forEach begin="1" end="${numOfPages}" var="i">
+                                    <c:choose>
+                                        <c:when test="${currentPage eq i}">
+                                            <li class="page-item active">
+                                                <a href="secured-admin-rooms.command?page=${i}&search-number=${searchNumber}"
+                                                   class="page-link ">${i}</a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a href="secured-admin-rooms.command?page=${i}&search-number=${searchNumber}"
+                                                   class="page-link ">${i}</a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
+            <!--Users table -->
         </main>
     </jsp:body>
 </t:page>

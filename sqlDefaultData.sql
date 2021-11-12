@@ -1,10 +1,10 @@
 INSERT INTO hotel_db.user(email, password, first_name, last_name, phone, role, status, about)
-VALUES ('root@root.com', '123', 'Admin', 'Nimda', '380939953400', 'admin', 'active',
+VALUES ('root@root.com', '7f566f11c6d269f5d0b21fbad96ceb6fa8a1a428f3893d9ba1442ef94ad57699162f6b2fc8242093910524661db7ac94bb1ef46739bcdcd500d3a0412dd767d9', 'Admin', 'Nimda', '380939953400', 'admin', 'active',
         'Default admin user. Full access.'),
-       ('user@user.com', '123', 'User', 'Resu', '380939953401', 'user', 'active', 'Default test user'),
-       ('man@man.com', '123', 'Manager', 'Reganam', '380939953402', 'manager', 'active',
+       ('user@user.com', '7f566f11c6d269f5d0b21fbad96ceb6fa8a1a428f3893d9ba1442ef94ad57699162f6b2fc8242093910524661db7ac94bb1ef46739bcdcd500d3a0412dd767d9', 'User', 'Resu', '380939953401', 'user', 'active', 'Default test user'),
+       ('man@man.com', '7f566f11c6d269f5d0b21fbad96ceb6fa8a1a428f3893d9ba1442ef94ad57699162f6b2fc8242093910524661db7ac94bb1ef46739bcdcd500d3a0412dd767d9', 'Manager', 'Reganam', '380939953402', 'manager', 'active',
         'Manager user. Can contact with user'),
-       ('usr@usr.com', '123', 'Тарас', 'Бульба', '380939953403', 'user', 'deactivated', 'Бот-коза Тарас.');
+       ('usr@usr.com', '7f566f11c6d269f5d0b21fbad96ceb6fa8a1a428f3893d9ba1442ef94ad57699162f6b2fc8242093910524661db7ac94bb1ef46739bcdcd500d3a0412dd767d9', 'Тарас', 'Бульба', '380939953403', 'user', 'deactivated', 'Бот-коза Тарас.');
 
 INSERT INTO hotel_db.room(number, adult_capacity, child_capacity, price, bed_size, about)
 VALUES ('1', '1', '0', '10.55', 'cot', 'Room for one'),

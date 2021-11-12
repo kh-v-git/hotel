@@ -134,6 +134,11 @@ a,
   -o-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s; }
 
+
+.action-button {
+  min-width: 125px;
+}
+
 a:focus,
 .button:focus {
   text-decoration: none;

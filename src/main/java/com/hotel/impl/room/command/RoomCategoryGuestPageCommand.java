@@ -1,10 +1,10 @@
 package com.hotel.impl.room.command;
 
 import com.hotel.Command;
-import com.hotel.impl.admin.room.Room;
-import com.hotel.impl.admin.room.RoomRepository;
-import com.hotel.impl.admin.room.RoomRepositorySQLImpl;
-import com.hotel.impl.admin.room.RoomService;
+import com.hotel.impl.room.Room;
+import com.hotel.impl.room.RoomRepository;
+import com.hotel.impl.room.RoomRepositorySQLImpl;
+import com.hotel.impl.room.RoomService;
 import com.hotel.utils.DataPatternValidation;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;

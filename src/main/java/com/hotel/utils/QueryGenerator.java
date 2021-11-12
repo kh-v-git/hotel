@@ -20,7 +20,7 @@ public class QueryGenerator {
         boolean textIsEmpty = sText.isEmpty();
         boolean listIsEmpty = pList.isEmpty();
 
-        if (!textIsEmpty || !listIsEmpty) {
+        if (!textIsEmpty && !listIsEmpty) {
             reString.append(" WHERE ");
             int i = 0;
             for (String searchParam : pList) {

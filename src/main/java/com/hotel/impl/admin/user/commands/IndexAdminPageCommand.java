@@ -1,10 +1,10 @@
 package com.hotel.impl.admin.user.commands;
 
 import com.hotel.Command;
-import com.hotel.impl.admin.user.User;
-import com.hotel.impl.admin.user.UserRepository;
-import com.hotel.impl.admin.user.UserRepositorySQLImpl;
-import com.hotel.impl.admin.user.UserService;
+import com.hotel.impl.user.User;
+import com.hotel.impl.user.UserRepository;
+import com.hotel.impl.user.UserRepositorySQLImpl;
+import com.hotel.impl.user.UserService;
 import com.hotel.security.RequiresRole;
 import com.hotel.utils.enums.UserRolesEnum;
 import org.apache.logging.log4j.LogManager;
@@ -37,7 +37,12 @@ public class IndexAdminPageCommand implements Command {
                 .map(String::trim)
                 .orElse("");
 
-        List<User> userList = getUserList();
+        String searchText = Optional.ofNullable(request.getParameter("search-email"))
+                .map(Object::toString)
+                .map(String::trim)
+                .orElse("");
+
+        List<User> userList = getUserList(searchText, Arrays.asList("email"));
         if (!userList.isEmpty()) {
             request.setAttribute("userList", userList);
         } else {
@@ -49,9 +54,9 @@ public class IndexAdminPageCommand implements Command {
         requestDispatcher.forward(request, response);
     }
 
-    private List<User> getUserList() {
+    private List<User> getUserList(String searchText, List<String> paramList) {
         UserRepository userRepository = new UserRepositorySQLImpl();
         UserService userService = new UserService(userRepository);
-        return userService.getUserList("", Arrays.asList());
+        return userService.getUserList(searchText, paramList);
     }
 }

@@ -113,7 +113,10 @@
                                 <form method="post">
                                     <!--First Name start-->
                                     <div class="mt-10">
-                                        <input type="text" name="user-first-name" placeholder="First Name"
+                                        <label for="user-firs-name">
+                                            <fmt:message key="user.first.name" bundle="${localeBundle}"/>
+                                        </label>
+                                        <input type="text" name="user-first-name" id="user-firs-name" placeholder="First Name"
                                                value="${user.firstName}"
                                                pattern="^[A-Za-z\u0400-\u04ff]{1,32}$"
                                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'"
@@ -124,7 +127,10 @@
 
                                     <!--Last Name start-->
                                     <div class="mt-10">
-                                        <input type="text" name="user-last-name" placeholder="Last Name"
+                                        <label for="user-last-name">
+                                            <fmt:message key="user.last.name" bundle="${localeBundle}"/>
+                                        </label>
+                                        <input type="text" name="user-last-name" id="user-last-name" placeholder="Last Name"
                                                value="${user.lastName}"
                                                pattern="^[A-Za-z\u0400-\u04ff]{1,32}$"
                                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'"
@@ -135,7 +141,10 @@
 
                                     <!--Phone start-->
                                     <div class="mt-10">
-                                        <input type="text" name="user-phone" placeholder="380959956781"
+                                        <label for="user-phone">
+                                            <fmt:message key="user.phone" bundle="${localeBundle}"/>
+                                        </label>
+                                        <input type="text" name="user-phone" id="user-phone" placeholder="380959956781"
                                                value="${user.phone}"
                                                pattern="^[0-9]{12}$"
                                                onfocus="this.placeholder = ''" onblur="this.placeholder = '380959956781'"
@@ -146,7 +155,10 @@
 
                                     <!--Email start-->
                                     <div class="mt-10">
-                                        <input type="text" name="user-email" placeholder="Email"
+                                        <label for="user-email">
+                                            <fmt:message key="user.email" bundle="${localeBundle}"/>
+                                        </label>
+                                        <input type="text" name="user-email" id="user-email" placeholder="Email"
                                                value="${user.email}"
                                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
                                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'"
@@ -157,8 +169,11 @@
 
                                     <!--User role start-->
                                     <div class="input-group-icon mt-10">
+                                        <label for="user-role">
+                                            <fmt:message key="user.role" bundle="${localeBundle}"/>
+                                        </label>
                                         <div class="form-select">
-                                            <select name="user-role" required>
+                                            <select name="user-role" id="user-role" required>
                                                 <c:forEach items="${userRoleList}" var="role">
                                                     <c:choose>
                                                         <c:when test="${role eq user.role}">
@@ -180,7 +195,10 @@
                                     <!--User status start-->
                                     <div class="input-group-icon mt-10">
                                         <div class="form-select" id="default-select">
-                                            <select name="user-status" required>
+                                            <label for="user-status">
+                                                <fmt:message key="user.status" bundle="${localeBundle}"/>
+                                            </label>
+                                            <select name="user-status" id="user-status" required>
                                                 <c:forEach items="${userStatusList}" var="status">
                                                     <c:choose>
                                                         <c:when test="${status eq user.status}">
@@ -202,23 +220,26 @@
 
                                     <!--About start-->
                                     <div class="mt-10">
-                                        <input type="text" name="user-about" placeholder="About"
+                                        <label for="user-about">
+                                            <fmt:message key="user.about" bundle="${localeBundle}"/>
+                                        </label>
+                                        <input type="text" name="user-about" id="user-about" placeholder="About"
                                                value="${user.about}"
-                                               pattern="^[A-Za-z\u0400-\u04ff]{1,32}$"
+                                               pattern="^(\p{L}+[\s]*)+$"
                                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'About yourself'"
                                                class="single-input">
                                     </div>
                                     <!--About end-->
 
                                     <button class="btn btn-lg btn-primary btn-block" type="submit"
-                                            formaction="user-admin-update.command?user-id=${user.userID}">
+                                            formaction="user-update-admin.command?user-id=${user.userID}">
                                         <fmt:message key="update" bundle="${localeBundle}"/>
                                     </button>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit"
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit" formnovalidate
                                             formaction="user-admin-delete.command?user-id=${user.userID}">
                                         <fmt:message key="delete" bundle="${localeBundle}"/>
                                     </button>
-                                    <button class="btn btn-lg btn-primary btn-block" type="submit"
+                                    <button class="btn btn-lg btn-primary btn-block" type="submit" formnovalidate
                                             formaction="secured-admin.command">
                                         <fmt:message key="cancel" bundle="${localeBundle}"/>
                                     </button>

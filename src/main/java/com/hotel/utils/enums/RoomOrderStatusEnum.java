@@ -10,7 +10,7 @@ public enum RoomOrderStatusEnum {
     public static List<String> getRoomOrderStatusList() {
         return Arrays.stream(RoomOrderStatusEnum.values())
                 .map(RoomOrderStatusEnum::name)
-                .map(java.lang.String::toLowerCase)
+                .map(String::toLowerCase)
                 .collect(Collectors.toList());
     }
 }

@@ -2,10 +2,10 @@ package com.hotel.security.commands;
 
 import com.hotel.Command;
 import com.hotel.exception.HashPasswordException;
-import com.hotel.impl.admin.user.User;
-import com.hotel.impl.admin.user.UserRepository;
-import com.hotel.impl.admin.user.UserRepositorySQLImpl;
-import com.hotel.impl.admin.user.UserService;
+import com.hotel.impl.user.User;
+import com.hotel.impl.user.UserRepository;
+import com.hotel.impl.user.UserRepositorySQLImpl;
+import com.hotel.impl.user.UserService;
 import com.hotel.utils.DataPatternValidation;
 import com.hotel.utils.passwordhash.PasswordHashService;
 import org.apache.logging.log4j.Level;

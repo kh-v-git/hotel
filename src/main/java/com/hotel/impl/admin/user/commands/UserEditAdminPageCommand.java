@@ -1,14 +1,15 @@
 package com.hotel.impl.admin.user.commands;
 
 import com.hotel.Command;
-import com.hotel.impl.admin.user.User;
-import com.hotel.impl.admin.user.UserRepository;
-import com.hotel.impl.admin.user.UserRepositorySQLImpl;
-import com.hotel.impl.admin.user.UserService;
+import com.hotel.impl.user.User;
+import com.hotel.impl.user.UserRepository;
+import com.hotel.impl.user.UserRepositorySQLImpl;
+import com.hotel.impl.user.UserService;
 import com.hotel.security.RequiresRole;
 import com.hotel.utils.DataPatternValidation;
 import com.hotel.utils.enums.UserRolesEnum;
 import com.hotel.utils.enums.UserStatusEnum;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,9 +35,8 @@ public class UserEditAdminPageCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String userId = request.getParameter("user-id");
-        if (DataPatternValidation.IntCheck(userId)) {
+        if (DataPatternValidation.intCheck(userId)) {
             Optional<User> maybeUser = getUser(Integer.parseInt(userId));
-
             if (maybeUser.isPresent()) {
                 request.setAttribute("user", maybeUser.get());
                 request.setAttribute("userRoleList", UserRolesEnum.getUserRoles());
@@ -46,16 +46,18 @@ public class UserEditAdminPageCommand implements Command {
                 requestDispatcher.forward(request, response);
 
             } else {
+                log.log(Level.DEBUG, "User by ID not found");
                 request.setAttribute("errorPage", "User by ID not found");
                 pageLocale(request, "user-edit-admin-page.command");
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher("pages/admin/user_edit_admin.jsp");
+                RequestDispatcher requestDispatcher = request.getRequestDispatcher("secured-admin.command");
                 requestDispatcher.forward(request, response);
             }
 
         } else {
+            log.log(Level.DEBUG, "User data validation failed");
             request.setAttribute("errorPage", "Data validation failed");
             pageLocale(request, "secured-admin.command");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("pages/admin/index_admin.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("secured-admin.command");
             requestDispatcher.forward(request, response);
         }
     }
@@ -72,7 +74,7 @@ public class UserEditAdminPageCommand implements Command {
                 .map(String::trim)
                 .orElse("");
         if (servletCommand.isEmpty()) {
-            servletCommand = "index.command";
+            servletCommand = "secured-admin.command";
         }
         localeRequest.getSession().setAttribute("pageQuery", queryString);
         localeRequest.getSession().setAttribute("pageCommand", servletCommand);
